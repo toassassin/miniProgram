@@ -9,5 +9,27 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "tabBar": {
+    "color": "#a5a5a5",
+    "backgroundColor": "#fff",
+    "position": "bottom",
+    "list": [{
+        "iconPath": "/static/img/img-t1.png",
+        "pagePath": "pages/index/main",
+        "text": "首页"
+      },
+      {
+        "iconPath": "/static/img/img-t1.png",
+        "pagePath": "pages/logs/main",
+        "text": "老师"
+      },
+      {
+        "iconPath": "/static/img/img-t1.png",
+        "pagePath": "pages/counter/main",
+        "text": "学生"
+      }
+    ]
+  },
+  "debug": true
 }
