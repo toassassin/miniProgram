@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <view>
     <view>
         <view class="navbar-top">
             <view>
-                <navigator url="../logs/main" class="nav-left">请老师</navigator>
+                <navigator url="../teacher/main" open-type="switchTab" class="nav-left">请老师</navigator>
             </view>
             <view>
-                <navigator url="../counter/main">当老师</navigator>
+                <navigator url="../counter/main" open-type="switchTab">当老师</navigator>
             </view>
         </view>
     </view>
@@ -27,23 +27,8 @@
     <view class="nav-box">
         <view class="page__bd">
             <view class="weui-grids">
-                <block>
-                    <navitem :url="url_1" :text="11"></navitem>
-                </block>
-                <block>
-                    <navitem :url="url_1" :text="11"></navitem>
-                </block>
-                <block>
-                    <navitem :url="url_1" :text="11"></navitem>
-                </block>
-                <block>
-                    <navitem :url="url_1" :text="11"></navitem>
-                </block>
-                <block>
-                    <navitem :url="url_1" :text="22"></navitem>
-                </block>
-                <block>
-                    <navitem :url="url_1" :text="33"></navitem>
+                <block v-for="(item,index) in navborArr" :key="index">
+                    <navitem :url="item.url" :text="item.text"></navitem>
                 </block>
             </view>
         </view>
@@ -82,11 +67,11 @@
                 <listTeacher></listTeacher>
                 <listTeacher></listTeacher>
                 <listTeacher></listTeacher>
-                </swiper-item>
+            </swiper-item>
             <swiper-item><listTeacher></listTeacher></swiper-item>
         </swiper>
     </view>
-  </div>
+  </view>
 </template>
 
 <script>
@@ -102,7 +87,14 @@ export default {
             currentData: 0,
             url_1: "/static/img/p1.png",
             url_2: "/static/img/p2.png",
-            // imgs:[2,4,5,6,6]
+            navborArr: [
+                {"url":"../../../static/img/img-yw.png","text":"语文"},
+                {"url":"../../../static/img/img-sx.png","text":"数学"},
+                {"url":"../../../static/img/img-yy.png","text":"英语"},
+                {"url":"../../../static/img/img-wl.png","text":"物理"},
+                {"url":"../../../static/img/img-hx.png","text":"化学"},
+                {"url":"../../../static/img/img-more.png","text":"更多"}
+            ],
             imgs: [
                 "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1535385248&di=7716fc5c62cbe4cb35c49961fac20e79&src=http://pic9.photophoto.cn/20081128/0033033999061521_b.jpg",
                 "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535395199954&di=91e1a397937692f7ebaa2719d2858c12&imgtype=0&src=http%3A%2F%2Fpic23.photophoto.cn%2F20120503%2F0034034456597026_b.jpg",

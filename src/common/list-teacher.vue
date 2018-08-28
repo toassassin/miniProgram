@@ -61,7 +61,7 @@
     width: 45rpx;
     height: 44rpx;
     margin-right: 10rpx;
-    background: url("../../static/img/img-t1.png") no-repeat center;
+    background: url("../../static/img/img-subject.png") no-repeat center;
     background-size: cover;
     vertical-align: text-bottom;
 }
@@ -91,15 +91,14 @@ view.list-disc {
     position: absolute;
     top: 50%;
     margin-top: -4px;
-    right: 2px;
+    right: 4px;
 }
 .list-item {
     position: relative;
     margin: 0 24rpx;
-    padding: 20px 0;
 }
 .list-item navigator {
-    padding: 0;
+    padding: 20px 0;
 }
 .list-item:after {
     content: " ";

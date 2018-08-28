@@ -1,5 +1,5 @@
 <template>
-	<navigator url="" class="weui-grid" hover-class="weui-grid-active">
+	<navigator url="../teacher/main" class="weui-grid" open-type="switchTab" hover-class="weui-grid-active">
 		<image class="weui-grid__icon" :src="url" />
         <text class="weui-grid__label">{{text}}</text>
     </navigator>
