@@ -1,27 +1,34 @@
 <template>
-    <view class="weui-cells_after-title list-item">
+    <view class="weui-cells_after-title list-item list-scale">
         <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
                 <img src="../../static/img/img-man.png" alt="" style="margin-right: 15px;vertical-align: middle;width:90rpx; height: 90rpx;">
             </view>
             <view class="weui-cell__bd list-center">
                 <view>
-                    <text class="list-name">张老师/男</text>
-                    <text class="list-code">T434323</text>
+                    <text class="list-name">{{data.tcName}}/{{data.tcSex==1?"男":"女"}}</text>
+                    <text class="list-code">T{{data.id}}</text>
                 </view>
                 <view>
-                    <view class="list-school"><i class="icon"></i>深圳大学</view>
-                    <view class="list-subject"><i class="icon"></i>语文</view>
+                    <view class="list-school"><i class="icon"></i>{{data.tcSchool}}</view>
+                    <view class="list-subject"><i class="icon"></i>{{data.tcZhuanye}}</view>
                 </view>
                 <view class="list-disc">
-                    <text>oioijoiejfoiwenoiw3u40923jfweoifjiofwoirfwoeifjweifjwep</text>
+                    <text>{{data.tcComments}}</text>
                 </view>
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access list-right-arrow"></view>
         </navigator>
     </view>
 </template>
-
+<script>
+export default {
+    props: ["data"],
+    data() {
+        return {};
+    }
+};
+</script>
 <style scoped>
 .list-center view {
     max-width: 500px;
@@ -44,8 +51,8 @@
     display: inline-block;
     font-size: 28rpx;
 }
-.list-subject {
-    margin-left: 15rpx;
+.list-school {
+    margin-right: 15rpx;
 }
 .list-school .icon {
     display: inline-block;

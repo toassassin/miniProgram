@@ -11,7 +11,7 @@
         </view>
     </view>
     <view>
-        <p class="location"><i class="icon"></i> 当前城市：<text>广州</text></p>
+        <p class="location"><i class="icon"></i> 当前城市：<text>{{headData.cityName}}</text></p>
     </view>
     <view>
         <view class="swiper-box">
@@ -58,17 +58,25 @@
         </view>
     </view>
     <view>
-        <view class="list-title">
+        <view class="list-title" id="test">
             <view :class="{active:currentData==0}"  data-current = "0" @tap='checkCurrent($event)'>热门老师</view>
             <view :class="{active:currentData==1}" data-current = "1" @tap='checkCurrent($event)'>最新订单</view>
         </view>
-        <swiper :current="currentData" class="swiper-list" duration="300" @change="changerlist($event)">
-            <swiper-item style="height:357px;">
-                <listTeacher></listTeacher>
-                <listTeacher></listTeacher>
-                <listTeacher></listTeacher>
+        <swiper :current="currentData" class="swiper-list" :style="{height:list_item_height>0?list_item_height+'px':auto}" duration="300" @change="changerlist($event)">
+            <swiper-item>
+                <scroll-view scroll-y :style="{height:list_item_height>0?list_item_height+'px':auto}">
+                    <view v-for="(item,index) in hotTeacher" :key="index">
+                        <listTeacher :data="item"></listTeacher>
+                    </view>
+                </scroll-view>
             </swiper-item>
-            <swiper-item><listTeacher></listTeacher></swiper-item>
+            <swiper-item>
+                <scroll-view scroll-y :style="{height:list_item_height>0?list_item_height+'px':auto}">
+                    <view v-for="(item,index) in newOrder" :key="index">
+                        <listOrder :data="item"></listOrder>
+                    </view>
+                </scroll-view>
+            </swiper-item>
         </swiper>
     </view>
   </view>
@@ -77,23 +85,29 @@
 <script>
 import navitem from "../../common/iconitem.vue";
 import listTeacher from "../../common/list-teacher.vue";
+import listOrder from "../../common/list-order.vue";
 export default {
     components: {
         navitem,
-        listTeacher
+        listTeacher,
+        listOrder
     },
     data() {
         return {
+            list_item_height: 0,
+            headData: {},
+            hotTeacher: {},
+            newOrder: {},
             currentData: 0,
             url_1: "/static/img/p1.png",
             url_2: "/static/img/p2.png",
             navborArr: [
-                {"url":"../../../static/img/img-yw.png","text":"语文"},
-                {"url":"../../../static/img/img-sx.png","text":"数学"},
-                {"url":"../../../static/img/img-yy.png","text":"英语"},
-                {"url":"../../../static/img/img-wl.png","text":"物理"},
-                {"url":"../../../static/img/img-hx.png","text":"化学"},
-                {"url":"../../../static/img/img-more.png","text":"更多"}
+                { url: "../../../static/img/img-yw.png", text: "语文" },
+                { url: "../../../static/img/img-sx.png", text: "数学" },
+                { url: "../../../static/img/img-yy.png", text: "英语" },
+                { url: "../../../static/img/img-wl.png", text: "物理" },
+                { url: "../../../static/img/img-hx.png", text: "化学" },
+                { url: "../../../static/img/img-more.png", text: "更多" }
             ],
             imgs: [
                 "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1535385248&di=7716fc5c62cbe4cb35c49961fac20e79&src=http://pic9.photophoto.cn/20081128/0033033999061521_b.jpg",
@@ -105,10 +119,25 @@ export default {
     onLoad() {
         this.getData();
     },
+    onReady() {},
+    mounted() {},
     methods: {
+        getHeight() {
+            var that = this;
+            console.log(wx.canIUse("createSelectorQuery"));
+            wx
+                .createSelectorQuery()
+                .selectAll(".list-scale")
+                .boundingClientRect(function(rects) {
+                    rects.forEach(function(rect) {
+                        console.log("height=" + rect.height);
+                        that.list_item_height += rect.height;
+                    });
+                })
+                .exec();
+        },
         checkCurrent(event) {
             // event.mp == event
-            // console.log(event.target.dataset.current);
             if (this.currentData == event.target.dataset.current) {
                 return false;
             } else {
@@ -122,10 +151,24 @@ export default {
             // console.log(event.mp.detail.current);
         },
         async getData() {
-            var data = await this.$http.get(
-                "http://47.106.115.52:19091/index/getHeader?prefix=cd"
+            var that = this;
+            // 头部信息
+            var headData = await this.$http.get("/index/getHeader?prefix=cd");
+            this.headData = headData.data.data;
+            // 热门老师
+            var hotTeacher = await this.$http.get(
+                "/index/getTeacher?prefix=cd"
             );
-            console.log(data);
+            this.hotTeacher = hotTeacher.data.data;
+            // 最新订单
+            var newOrder = await this.$http.post(
+                "/latestOrder/getLatestOrder",
+                { prefix: "cd" }
+            );
+            this.newOrder = newOrder.data.data;
+            this.$nextTick(() => {
+                that.getHeight();
+            });
         },
         bindViewTap() {
             const url = "../logs/main";
@@ -134,7 +177,8 @@ export default {
         getUserInfo() {
             // 调用登录接口
             wx.login({
-                success: () => {
+                success: res => {
+                    console.log(res);
                     wx.getUserInfo({
                         success: res => {
                             this.userInfo = res.userInfo;
@@ -275,6 +319,6 @@ export default {
     background-color: #ffc851;
 }
 .swiper-list {
-    height: 375px;
+    /* height: 375px; */
 }
 </style>
