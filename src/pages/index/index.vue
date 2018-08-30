@@ -64,16 +64,16 @@
         </view>
         <swiper :current="currentData" class="swiper-list" :style="{height:list_item_height>0?list_item_height+'px':auto}" duration="300" @change="changerlist($event)">
             <swiper-item>
-                <scroll-view scroll-y :style="{height:list_item_height>0?list_item_height+'px':auto}">
-                    <view v-for="(item,index) in hotTeacher" :key="index">
-                        <listTeacher :data="item"></listTeacher>
+                <scroll-view scroll-y style="background-color: #eee;" :style="{height:list_item_height_r>0?list_item_height_r+'px':auto}">
+                    <view v-for="(item,index) in newOrder" :key="index">
+                        <listOrder :data="item"></listOrder>
                     </view>
                 </scroll-view>
             </swiper-item>
             <swiper-item>
                 <scroll-view scroll-y :style="{height:list_item_height>0?list_item_height+'px':auto}">
-                    <view v-for="(item,index) in newOrder" :key="index">
-                        <listOrder :data="item"></listOrder>
+                    <view v-for="(item,index) in hotTeacher" :key="index">
+                        <listTeacher :data="item"></listTeacher>
                     </view>
                 </scroll-view>
             </swiper-item>
@@ -95,6 +95,7 @@ export default {
     data() {
         return {
             list_item_height: 0,
+            list_item_height_r: 0,
             headData: {},
             hotTeacher: {},
             newOrder: {},
@@ -122,17 +123,34 @@ export default {
     onReady() {},
     mounted() {},
     methods: {
-        getHeight() {
+        getHeightLeft() {
             var that = this;
             console.log(wx.canIUse("createSelectorQuery"));
             wx
                 .createSelectorQuery()
-                .selectAll(".list-scale")
+                .selectAll(".list-item")
                 .boundingClientRect(function(rects) {
+                    // console.log("left=" + rects);
                     rects.forEach(function(rect) {
-                        console.log("height=" + rect.height);
+                        // console.log("height1=" + rect.height);
                         that.list_item_height += rect.height;
                     });
+                    // console.log("left=" + that.list_item_height);
+                })
+                .exec();
+        },
+        getHeightRight() {
+            var that = this;
+            wx
+                .createSelectorQuery()
+                .selectAll(".list-item-r")
+                .boundingClientRect(function(rects) {
+                    // console.log("right=" + rects);
+                    rects.forEach(function(rect) {
+                        // console.log("height2=" + rect.height);
+                        that.list_item_height_r += rect.height;
+                    });
+                    // console.log("right=" + that.list_item_height_r);
                 })
                 .exec();
         },
@@ -153,12 +171,14 @@ export default {
         async getData() {
             var that = this;
             // 头部信息
-            var headData = await this.$http.get("/index/getHeader?prefix=cd");
+            var headData = await this.$http.get("/index/getHeader", {
+                prefix: "cd"
+            });
             this.headData = headData.data.data;
             // 热门老师
-            var hotTeacher = await this.$http.get(
-                "/index/getTeacher?prefix=cd"
-            );
+            var hotTeacher = await this.$http.get("/index/getTeacher", {
+                prefix: "cd"
+            });
             this.hotTeacher = hotTeacher.data.data;
             // 最新订单
             var newOrder = await this.$http.post(
@@ -167,7 +187,8 @@ export default {
             );
             this.newOrder = newOrder.data.data;
             this.$nextTick(() => {
-                that.getHeight();
+                that.getHeightLeft();
+                that.getHeightRight();
             });
         },
         bindViewTap() {
@@ -317,8 +338,5 @@ export default {
     width: 100%;
     height: 4rpx;
     background-color: #ffc851;
-}
-.swiper-list {
-    /* height: 375px; */
 }
 </style>

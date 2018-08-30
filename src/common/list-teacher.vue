@@ -50,9 +50,7 @@ export default {
 .list-subject {
     display: inline-block;
     font-size: 28rpx;
-}
-.list-school {
-    margin-right: 15rpx;
+    margin: 13rpx 15rpx 8rpx 0;
 }
 .list-school .icon {
     display: inline-block;
@@ -72,12 +70,15 @@ export default {
     background-size: cover;
     vertical-align: text-bottom;
 }
-.list-disc {
+view.list-disc {
     font-size: 24rpx;
     color: #767676;
-}
-view.list-disc {
     line-height: 1.8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 .list-right-arrow {
     width: 50rpx;
@@ -86,15 +87,13 @@ view.list-disc {
 .list-right-arrow:after {
     content: " ";
     display: inline-block;
-    height: 15px;
-    width: 15px;
+    height: 10px;
+    width: 10px;
     border-width: 2px 2px 0 0;
     border-color: #c8c8cd;
     border-style: solid;
     -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
     transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
-    position: relative;
-    top: -2px;
     position: absolute;
     top: 50%;
     margin-top: -4px;
@@ -102,11 +101,8 @@ view.list-disc {
 }
 .list-item {
     position: relative;
-    margin: 0 24rpx;
 }
-.list-item navigator {
-    padding: 20px 0;
-}
+
 .list-item:after {
     content: " ";
     position: absolute;
@@ -116,5 +112,8 @@ view.list-disc {
     height: 1px;
     border-bottom: 1rpx solid #d9d9d9;
     color: #d9d9d9;
+}
+.list-item navigator {
+    padding: 20rpx 24rpx;
 }
 </style>
