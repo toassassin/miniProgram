@@ -1,10 +1,9 @@
 {
   "pages": [
-    "pages/teacher/main",
-    "pages/teacherDetail/main",
+    "pages/student/main",
     "pages/index/main",
-    "pages/logs/main",
-    "pages/counter/main"
+    "pages/teacherDetail/main",
+    "pages/teacher/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -32,7 +31,7 @@
       {
         "iconPath": "/static/img/img-s1.png",
         "selectedIconPath": "/static/img/img-s2.png",
-        "pagePath": "pages/counter/main",
+        "pagePath": "pages/student/main",
         "text": "学生"
       }
     ]

@@ -1,12 +1,12 @@
 <template>
     <view class="weui-cells_after-title list-item list-scale">
-        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <navigator :url="'../teacherDetail/main?id='+data.id" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
                 <img src="../../static/img/img-man.png" alt="" style="margin-right: 15px;vertical-align: middle;width:90rpx; height: 90rpx;">
             </view>
             <view class="weui-cell__bd list-center">
                 <view>
-                    <text class="list-name">{{data.tcName}}/{{data.tcSex==1?"男":"女"}}</text>
+                    <text class="list-name">{{data.tcName}}/</text><text v-if="data.tcSex==1">男</text><text v-if="data.tcSex==2">女</text>
                     <text class="list-code">T{{data.id}}</text>
                 </view>
                 <view>
@@ -42,6 +42,7 @@ export default {
     font-weight: bold;
 }
 .list-code {
+    margin-left: 10rpx;
     font-size: 12px;
     color: #a2a2a2;
     font-weight: bold;

@@ -1,14 +1,30 @@
 <template>
-	<navigator url="../teacher/main" class="weui-grid" open-type="switchTab" hover-class="weui-grid-active">
+	<view class="weui-grid" @tap="switchbar(text)" hover-class="weui-grid-active">
 		<image class="weui-grid__icon" :src="url" />
+        <!-- <img  class="weui-grid__icon" :src="url" alt=""> -->
         <text class="weui-grid__label">{{text}}</text>
-    </navigator>
+    </view>
 </template>
 <script>
 export default {
     props: ["url", "text"],
     data() {
         return {};
+    },
+    onLoad(){
+        // console.log(this.url)
+    },
+    methods:{
+        switchbar(arg){
+            if(arg=="更多"){
+                arg='';
+            }
+            // console.log(arg)
+            wx.setStorageSync("subject",arg);
+            wx.switchTab({
+                url:"../teacher/main"
+            })
+        }
     }
 };
 </script>

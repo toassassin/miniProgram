@@ -1,65 +1,68 @@
 <template>
 	<view>
-		<search></search>
-	    <view class="weui-flex">
-	        <view class="weui-flex__item filter-item" :class="{active:current==0}" data-current="0" @tap="showPanel($event)">
-	        	<view class="placeholder">学校</view>
-	        </view>
-	        <view class="weui-flex__item filter-item" :class="{active:current==1}" data-current="1" @tap="showPanel($event)">
-	        	<view class="placeholder">科目</view>
-	        </view>
-	        <view class="weui-flex__item filter-item" :class="{active:current==2}" data-current="2" @tap="showPanel($event)">
-	        	<view class="placeholder">性别</view>
-	        </view>
-	        <view class="weui-flex__item filter-item" :class="{active:current==3}" data-current="3" @tap="showPanel($event)">
-	        	<view class="placeholder">类型</view>
-	        </view>
-	    </view>
-	    <view>
-			<view class="filter-panel" v-if="current==0">
-				<view class="filter-box filter-panel-left">
-					<scroll-view scroll-y style="height:400rpx;" class="scroll-y">
-						<view class="weui-cells_after-title">
-							<view class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="search($event,'county','')">
-								<view class="weui-cell__hd">全部</view>
-								<view class="weui-cell__ft weui-cell__ft_in-access list-right-arrow"></view>
+	    <view class="filter-cover" v-if="current<4" @tap="current=9"></view>
+		<view class="fixed">
+			<search></search>
+		    <view class="weui-flex">
+		        <view class="weui-flex__item filter-item" :class="{active:current==0}" data-current="0" @tap="showPanel($event)">
+		        	<view class="placeholder">学校</view>
+		        </view>
+		        <view class="weui-flex__item filter-item" :class="{active:current==1}" data-current="1" @tap="showPanel($event)">
+		        	<view class="placeholder">科目</view>
+		        </view>
+		        <view class="weui-flex__item filter-item" :class="{active:current==2}" data-current="2" @tap="showPanel($event)">
+		        	<view class="placeholder">性别</view>
+		        </view>
+		        <view class="weui-flex__item filter-item" :class="{active:current==3}" data-current="3" @tap="showPanel($event)">
+		        	<view class="placeholder">类型</view>
+		        </view>
+		    </view>
+		    <view>
+				<view class="filter-panel" v-if="current==0">
+					<view class="filter-box filter-panel-left">
+						<scroll-view scroll-y style="height:400rpx;" class="scroll-y">
+							<view class="weui-cells_after-title">
+								<view class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="search($event,'county','')">
+									<view class="weui-cell__hd">全部</view>
+									<view class="weui-cell__ft weui-cell__ft_in-access list-right-arrow"></view>
+								</view>
 							</view>
-						</view>
-						<view class="weui-cells_after-title" v-for="(item,index) in origin" :key="index">
-							<view class="weui-cell" hover-class="weui-cell_active" @tap="search($event,'county',item.countyName)">
-								<view class="weui-cell__bd">{{item.countyName}}</view>
-								<view class="weui-cell__ft  weui-cell__ft_in-access"></view>
+							<view class="weui-cells_after-title" v-for="(item,index) in origin" :key="index">
+								<view class="weui-cell" hover-class="weui-cell_active" @tap="search($event,'county',item.countyName)">
+									<view class="weui-cell__bd">{{item.countyName}}</view>
+									<view class="weui-cell__ft  weui-cell__ft_in-access"></view>
+								</view>
 							</view>
-						</view>
-					</scroll-view>
+						</scroll-view>
+					</view>
+					<view class="filter-box filter-panel-right">
+						<scroll-view scroll-y style="height:400rpx;" class="scroll-y">
+							<view class="weui-cells_after-title" v-for="(item,index) in school" :key="index">
+								<view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="search($event,'schoolId',item.id)">
+									<view class="weui-cell__hd">{{item.schoolName}}</view>
+								</view>
+							</view>
+						</scroll-view>
+					</view>
 				</view>
-				<view class="filter-box filter-panel-right">
-					<scroll-view scroll-y style="height:400rpx;" class="scroll-y">
-						<view class="weui-cells_after-title" v-for="(item,index) in school" :key="index">
-							<view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="search($event,'schoolId',item.id)">
-								<view class="weui-cell__hd">{{item.schoolName}}</view>
-							</view>
-						</view>
-					</scroll-view>
+				<view class="filter-panel" v-if="current==1">
+					<text @tap="search($event,'subject','数学')">数学</text>
+					<text @tap="search($event,'subject','英语')">英语</text>
+					<text @tap="search($event,'subject','语文')">语文</text>
+					<text @tap="search($event,'subject','物理')">物理</text>
+					<text @tap="search($event,'subject','化学')">化学</text>
 				</view>
-			</view>
-			<view class="filter-panel" v-if="current==1">
-				<text @tap="search($event,'subject','数学')">数学</text>
-				<text @tap="search($event,'subject','英语')">英语</text>
-				<text @tap="search($event,'subject','语文')">语文</text>
-				<text @tap="search($event,'subject','物理')">物理</text>
-				<text @tap="search($event,'subject','化学')">化学</text>
-			</view>
-			<view class="filter-panel" v-if="current==2">
-				<text @tap="search($event,'sex','1')">男</text>
-				<text @tap="search($event,'sex','2')">女</text>
-			</view>
-			<view class="filter-panel" v-if="current==3">
-				<text @tap="search($event,'type','专职老师')">专职老师</text>
-				<text @tap="search($event,'type','大学生')">大学生</text>
-			</view>
-	    </view>
-	    <view>
+				<view class="filter-panel" v-if="current==2">
+					<text @tap="search($event,'sex','1')">男</text>
+					<text @tap="search($event,'sex','2')">女</text>
+				</view>
+				<view class="filter-panel" v-if="current==3">
+					<text @tap="search($event,'type','专职老师')">专职老师</text>
+					<text @tap="search($event,'type','大学生')">大学生</text>
+				</view>
+		    </view>
+		</view>
+	    <view style="margin-top:90px;">
 			<scroll-view scroll-y style="height:auto;">
 				<view v-for="(item,index) in list.list" :key="index">
 					<listTeacher :data="item"></listTeacher>
@@ -95,15 +98,22 @@ export default {
                 page: "1",
                 pageSize: "10"
             },
+            formTamp:{},
             current: 9
         };
     },
-    onLoad() {
-        console.log("load");
-        this.getData();
+    onLoad(options) {
+    	// console.log("options="+JSON.stringify(options))
+     //    console.log("load");
+     //    this.formTamp=Object.assign({},this.form);
+     //    this.getData();
     },
     onShow() {
         console.log("show");
+        console.log(wx.getStorageSync("subject"));
+        this.form.subject=wx.getStorageSync("subject");
+        this.formTamp=Object.assign({},this.form);
+        this.getData();
     },
     onReady() {
         console.log("ready");
@@ -113,46 +123,75 @@ export default {
     },
     methods: {
         search(event, arg, value) {
+        	if(arg!="county"&&value!=""){
+        		this.current=9;
+        	}
             console.log(arg);
             var that = this;
-            Object.keys(this.form).forEach(function(item, index) {
+            this.formTamp=Object.assign({},this.form);
+            Object.keys(this.formTamp).forEach(function(item, index) {
                 if (item == arg) {
-                    that.form[item] = value;
+                    that.formTamp[item] = value;
                 }
             });
-            console.log(this.form);
+            // console.log(JSON.stringify(this.formTamp));
             this.getData();
         },
         async getData() {
             // 市、区
             var origin = await this.$http.get(
                 "/common/getPositionCounty",
-                this.form
+                this.formTamp
             );
             this.origin = origin.data.data;
+            // console.log(this.origin)
             // 学校
             var school = await this.$http.post(
                 "/hotUniversity/getUniversityList",
-                this.form
+                this.formTamp
             );
             this.school = school.data.data;
             // 科目
-            // var subject = await this.$http.get("/index/getSubject", this.form);
+            // var subject = await this.$http.get("/index/getSubject", this.formTamp);
             // this.subject = subject.data.data;
             // console.log(this.subject);
             // 教员列表
-            var list = await this.$http.post("/teacher/getList", this.form);
+            var list = await this.$http.post("/teacher/getList", this.formTamp);
             this.list = list.data.data;
-            // console.log(this.list);
+            // console.log(JSON.stringify(this.list));
+            //
+            this.formTamp={};
         },
         showPanel(event) {
             // console.log(event.currentTarget);
-            this.current = event.currentTarget.dataset.current;
+            if(this.current==event.currentTarget.dataset.current){
+            	this.current=9;
+            }else{
+
+            	this.current = event.currentTarget.dataset.current;
+            }
         }
     }
 };
 </script>
 <style scoped>
+.fixed{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #fff;
+	z-index: 5;
+}
+.filter-cover{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.4);
+	z-index: 4;
+}
 .filter-item {
     height: 80rpx;
 }
@@ -190,6 +229,11 @@ export default {
 }
 .filter-panel {
     display: flex;
+}
+.filter-panel text{
+	display: inline-block;
+	padding: 2px 3px;
+	margin: 4px;
 }
 .filter-panel-left {
     width: 40%;

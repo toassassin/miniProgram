@@ -34,7 +34,7 @@
         </view>
     </view>
     <view class="go">
-        <img src="../../../static/img/img-go.png" alt="">
+        <img src="/static/img/img-go.png" alt="">
     </view>
     <view>
         <view class=" weui-cells_after-title">
@@ -45,14 +45,14 @@
         </view>
         <view class="recommend-box">
             <view class="r-left">
-                <img src="../../../static/img/img-f-school.png" alt="">
+                <img src="/static/img/img-f-school.png" alt="">
             </view>
             <view class="r-right">
                 <view>
-                    <img src="../../../static/img/img-f-school.png" alt="">
+                    <img src="/static/img/img-f-school.png" alt="">
                 </view>
                 <view>
-                    <img src="../../../static/img/img-f-school.png" alt="">
+                    <img src="/static/img/img-f-school.png" alt="">
                 </view>
             </view>
         </view>
@@ -64,16 +64,16 @@
         </view>
         <swiper :current="currentData" class="swiper-list" :style="{height:list_item_height>0?list_item_height+'px':auto}" duration="300" @change="changerlist($event)">
             <swiper-item>
-                <scroll-view scroll-y style="background-color: #eee;" :style="{height:list_item_height_r>0?list_item_height_r+'px':auto}">
-                    <view v-for="(item,index) in newOrder" :key="index">
-                        <listOrder :data="item"></listOrder>
+                <scroll-view scroll-y :style="{height:list_item_height>0?list_item_height+'px':auto}">
+                    <view v-for="(item,index) in hotTeacher" :key="index">
+                        <listTeacher :data="item"></listTeacher>
                     </view>
                 </scroll-view>
             </swiper-item>
             <swiper-item>
-                <scroll-view scroll-y :style="{height:list_item_height>0?list_item_height+'px':auto}">
-                    <view v-for="(item,index) in hotTeacher" :key="index">
-                        <listTeacher :data="item"></listTeacher>
+                <scroll-view scroll-y style="background-color: #eee;" :style="{height:list_item_height_r>0?list_item_height_r+'px':auto}">
+                    <view v-for="(item,index) in newOrder" :key="index">
+                        <listOrder :data="item"></listOrder>
                     </view>
                 </scroll-view>
             </swiper-item>
@@ -100,15 +100,13 @@ export default {
             hotTeacher: {},
             newOrder: {},
             currentData: 0,
-            url_1: "/static/img/p1.png",
-            url_2: "/static/img/p2.png",
             navborArr: [
-                { url: "../../../static/img/img-yw.png", text: "语文" },
-                { url: "../../../static/img/img-sx.png", text: "数学" },
-                { url: "../../../static/img/img-yy.png", text: "英语" },
-                { url: "../../../static/img/img-wl.png", text: "物理" },
-                { url: "../../../static/img/img-hx.png", text: "化学" },
-                { url: "../../../static/img/img-more.png", text: "更多" }
+                { url: "/static/img/img-yw.png", text: "语文" },
+                { url: "/static/img/img-sx.png", text: "数学" },
+                { url: "/static/img/img-yy.png", text: "英语" },
+                { url: "/static/img/img-wl.png", text: "物理" },
+                { url: "/static/img/img-hx.png", text: "化学" },
+                { url: "/static/img/img-more.png", text: "更多" }
             ],
             imgs: [
                 "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1535385248&di=7716fc5c62cbe4cb35c49961fac20e79&src=http://pic9.photophoto.cn/20081128/0033033999061521_b.jpg",
