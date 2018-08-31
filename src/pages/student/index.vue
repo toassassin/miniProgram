@@ -2,7 +2,7 @@
 	<view>
 	    <view class="filter-cover" v-if="current<3" @tap="current=9"></view>
 		<view class="fixed">
-			<search></search>
+			<search @input="getSearchVal"></search>
 		    <view class="weui-flex">
 		        <view class="weui-flex__item filter-item" :class="{active:current==0}" data-current="0" @tap="showPanel($event)">
 		        	<view class="placeholder">订单状态</view>
@@ -16,17 +16,17 @@
 		    </view>
 		    <view>
 				<view class="filter-panel" v-if="current==0">
-					<text @tap="search($event,'status','0')">新发布</text>
-                    <text @tap="search($event,'status','1')">已安排</text>
-                    <text @tap="search($event,'status','2')">已完成</text>
+					<text @tap="search('status','0')">新发布</text>
+                    <text @tap="search('status','1')">已安排</text>
+                    <text @tap="search('status','2')">已完成</text>
 				</view>
 				<view class="filter-panel" v-if="current==1">
-					<text @tap="search($event,'lsType','专职老师')">专职老师</text>
-                    <text @tap="search($event,'lsType','大学生')">大学生</text>
-					<text @tap="search($event,'lsType','其他')">其他</text>
+					<text @tap="search('lsType','专职老师')">专职老师</text>
+                    <text @tap="search('lsType','大学生')">大学生</text>
+					<text @tap="search('lsType','其他')">其他</text>
 				</view>
                 <view class="filter-panel" v-if="current==2">
-                    <text v-for="(item,index) in datalist.dqList" :key="index" @tap="search($event,'dq',item.id)">{{item.countyName}}</text>
+                    <text v-for="(item,index) in datalist.dqList" :key="index" @tap="search('dq',item.id)">{{item.countyName}}</text>
                 </view>
 		    </view>
 		</view>
@@ -72,9 +72,6 @@ export default {
         //    this.getData();
     },
     onShow() {
-        // console.log("show");
-        // console.log(wx.getStorageSync("subject"));
-        // this.form.subject=wx.getStorageSync("subject");
         this.formTamp = Object.assign({}, this.form);
         this.getData();
     },
@@ -85,7 +82,10 @@ export default {
         // console.log("pages=");
     },
     methods: {
-        search(event, arg, value) {
+        getSearchVal(data){
+            this.search("searchText",data);
+        },
+        search(arg, value) {
             this.current = 9;
             console.log(arg);
             var that = this;

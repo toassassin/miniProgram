@@ -1,6 +1,6 @@
 <template>
     <view style="padding-bottom:1rpx;background-color:#eee;">
-        <view class="order-info">
+        <view class="order-resume">
             <view class="flex">
                 <view>{{detail.dq}}{{detail.orderName}}请{{detail.grade}}{{detail.subjectId}}家教</view>
                 <view>{{detail.time}}</view>
@@ -24,28 +24,67 @@
             <view>3、获取订单</view>
         </view>
         <view class="order-detail">
-            <view class="title"><text>基本资料</text></view>
+            <view class="title"><text>学员信息</text></view>
             <view class="order-info">
                 <ul>
                     <li>
-                        <span>籍贯</span>：
-                        <span>{{detail.tcJiguan}}</span>
+                        <span>订单编号</span>：
+                        <span>{{detail.id}}</span>
                     </li>
                     <li>
-                        <span>教龄</span>：
-                        <span>{{detail.tcJl}}</span>
+                        <span>联系人</span>：
+                        <span>{{detail.userName}}</span>
                     </li>
                     <li>
-                        <span>年级</span>：
-                        <span>{{tcNj}}</span>
+                        <span>求教科目</span>：
+                        <span>{{detail.subjectId}}</span>
                     </li>
                     <li>
-                        <span>所在城市</span>：
-                        <span>{{detail.tcCitys}}</span>
+                        <span>学员性别</span>：
+                        <span>{{detail.userSex}}</span>
                     </li>
                     <li>
-                        <span>具体专业</span>：
-                        <span>{{detail.tcZhuanye}}</span>
+                        <span>学员年级</span>：
+                        <span>{{detail.grade}}</span>
+                    </li>
+                    <li>
+                        <span>学员概况</span>：
+                        <span>{{detail.userSituation}}</span>
+                    </li>
+                    <li>
+                        <span style="width:auto;">授课次数每周{{detail.ots}}次</span>：
+                        <span>每次{{detail.oxs}}小时</span>
+                    </li>
+                    <li style="display:flex;justify-content:flex-start;">
+                        <span style="width:auto;">可授课时间</span>：
+                        <span style="flex:1;">{{detail.skTimes}}</span>
+                    </li>
+                </ul>
+            </view>
+        </view>
+        <view class="order-detail">
+            <view class="title"><text>教员信息</text></view>
+            <view class="order-info">
+                <ul>
+                    <li>
+                        <span>性别</span>：
+                        <span>{{detail.teacherSex}}</span>
+                    </li>
+                    <li>
+                        <span>教学方式</span>：
+                        <span>教员上门</span>
+                    </li>
+                    <li>
+                        <span>老师类型</span>：
+                        <span>{{detail.lsType}}</span>
+                    </li>
+                    <li>
+                        <span>学员性别</span>：
+                        <span>{{detail.userSex}}</span>
+                    </li>
+                    <li>
+                        <span>其他要求</span>：
+                        <span>{{detail.teacherInfo}}</span>
                     </li>
                 </ul>
             </view>
@@ -77,34 +116,34 @@ export default {
 };
 </script>
 <style scoped>
-.order-info {
+.order-resume {
     padding: 20rpx 24rpx 0;
     background-color: #fff;
     font-size: 28rpx;
 }
-.order-info .flex {
+.order-resume .flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10rpx;
     color: #767676;
 }
-.order-info .flex.bordertop {
+.order-resume .flex.bordertop {
     padding: 20rpx 0;
     margin: 0;
     border-top: 1px solid #eee;
 }
-.order-info .flex .icon {
+.order-resume .flex .icon {
     display: inline-block;
     margin-right: 10rpx;
 }
-.order-info .flex .icon.money {
+.order-resume .flex .icon.money {
     padding-left: 65rpx;
     background: url("../../../static/img/img-money.png") no-repeat left top;
     background-size: 30% 80%;
     color: #ffc851;
 }
-.order-info .flex .icon.address {
+.order-resume .flex .icon.address {
     padding-left: 50rpx;
     background: url("../../../static/img/img-address.png") no-repeat left top;
     vertical-align: text-bottom;
@@ -123,5 +162,38 @@ export default {
     width: 33.333333%;
     text-align: center;
     font-size: 28rpx;
+}
+.order-detail{
+    margin-bottom: 20rpx;
+    padding: 20rpx 24rpx 20rpx 40rpx;
+    background-color: #fff;
+}
+.order-detail .title{
+    position: relative;
+    font-size: 32rpx;
+    color: #454545;
+}
+.order-detail .title:before{
+    position: absolute;
+    display: block;
+    content: "";
+    top: 10rpx;
+    left: -16rpx;
+    width: 6rpx;
+    height: 30rpx;
+    background-color: #ffc851;
+}
+.order-detail span:first-child{
+    display: inline-block;
+    width: 120rpx;
+    text-align: justify;
+    text-align-last: justify;
+    color: #767676;
+}
+.order-info{
+    padding-top: 20rpx;
+    line-height: 40rpx;
+    font-size: 28rpx;
+    color: #404040;
 }
 </style>

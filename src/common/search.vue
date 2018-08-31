@@ -12,7 +12,7 @@
                     <!-- <a href="javascript:" class="weui-icon-clear" id="searchClear"></a> -->
                 </view>
             </form>
-            <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+            <view class="weui-search-bar__cancel-btn" id="searchCancel" @tap="trigger">搜索</view>
         </view>
     </view>
 </template>
@@ -26,7 +26,10 @@
 		methods:{
 			clearInput(){
 				this.inputVal='';
-			}
+			},
+            trigger(){
+                this.$emit("input",this.inputVal);
+            }
 		}
 	};
 </script>

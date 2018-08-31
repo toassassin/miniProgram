@@ -38,7 +38,7 @@
     </view>
     <view>
         <view class=" weui-cells_after-title">
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <navigator url="../teacher/main" open-type="switchTab" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__bd recommend">热门推荐</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access">更多</view>
             </navigator>
@@ -189,9 +189,8 @@ export default {
                 that.getHeightRight();
             });
         },
-        bindViewTap() {
-            const url = "../logs/main";
-            wx.navigateTo({ url });
+        bindViewTap(url) {
+            wx.switchTab({ url:url });
         },
         getUserInfo() {
             // 调用登录接口
