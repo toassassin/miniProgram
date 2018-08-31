@@ -50,7 +50,7 @@ export default {
     data() {
         return {
             datalist: {},
-            orderlist:{},
+            orderlist: {},
             origin: {},
             form: {
                 prefix: "cd",
@@ -59,23 +59,23 @@ export default {
                 status: "",
                 lsType: "",
                 dq: "",
-                searchText:""
+                searchText: ""
             },
-            formTamp:{},
+            formTamp: {},
             current: 9
         };
     },
     onLoad(options) {
-    	// console.log("options="+JSON.stringify(options))
-     //    console.log("load");
-     //    this.formTamp=Object.assign({},this.form);
-     //    this.getData();
+        // console.log("options="+JSON.stringify(options))
+        //    console.log("load");
+        //    this.formTamp=Object.assign({},this.form);
+        //    this.getData();
     },
     onShow() {
-        console.log("show");
+        // console.log("show");
         // console.log(wx.getStorageSync("subject"));
         // this.form.subject=wx.getStorageSync("subject");
-        this.formTamp=Object.assign({},this.form);
+        this.formTamp = Object.assign({}, this.form);
         this.getData();
     },
     onReady() {
@@ -86,10 +86,10 @@ export default {
     },
     methods: {
         search(event, arg, value) {
-            this.current=9;
+            this.current = 9;
             console.log(arg);
             var that = this;
-            this.formTamp=Object.assign({},this.form);
+            this.formTamp = Object.assign({}, this.form);
             Object.keys(this.formTamp).forEach(function(item, index) {
                 if (item == arg) {
                     that.formTamp[item] = value;
@@ -99,44 +99,45 @@ export default {
             this.getData();
         },
         async getData() {
-
             // 订单列表
-            var datalist = await this.$http.post("/latestOrder/getPageOrder", this.formTamp);
+            var datalist = await this.$http.post(
+                "/latestOrder/getPageOrder",
+                this.formTamp
+            );
             this.datalist = datalist.data.data;
-            this.orderlist=datalist.data.data.mapPage;
+            this.orderlist = datalist.data.data.mapPage;
             // console.log(this.orderlist);
             //
-            this.formTamp={};
+            this.formTamp = {};
         },
         showPanel(event) {
             // console.log(event.currentTarget);
-            if(this.current==event.currentTarget.dataset.current){
-            	this.current=9;
-            }else{
-
-            	this.current = event.currentTarget.dataset.current;
+            if (this.current == event.currentTarget.dataset.current) {
+                this.current = 9;
+            } else {
+                this.current = event.currentTarget.dataset.current;
             }
         }
     }
 };
 </script>
 <style scoped>
-.fixed{
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	background-color: #fff;
-	z-index: 5;
+.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 5;
 }
-.filter-cover{
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0,0,0,.4);
-	z-index: 4;
+.filter-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 4;
 }
 .filter-item {
     height: 80rpx;
@@ -149,13 +150,14 @@ export default {
     height: 100%;
     line-height: 80rpx;
     border-bottom: 1rpx solid #eee;
+    font-size: 28rpx;
 }
 .filter-item view:after {
     position: absolute;
     display: block;
     content: "";
-    top: 40rpx;
-    right: 25rpx;
+    top: 36rpx;
+    right: 35rpx;
     width: 0;
     height: 0;
     border-top: 10rpx solid #ffc851;
@@ -167,19 +169,16 @@ export default {
     color: #ffc851;
 }
 .filter-item.active view:after {
-    top: 30rpx;
+    top: 26rpx;
     border-top: 10rpx solid transparent;
     border-right: 10rpx solid transparent;
     border-bottom: 10rpx solid #ffc851;
     border-left: 10rpx solid transparent;
 }
-.filter-panel {
-    /*display: flex;*/
-}
-.filter-panel text{
-	display: inline-block;
-	padding: 2px 3px;
-	margin: 4px;
+.filter-panel text {
+    display: inline-block;
+    padding: 2px 3px;
+    margin: 4px;
 }
 .filter-panel-left {
     width: 40%;

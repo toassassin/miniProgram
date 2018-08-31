@@ -1,9 +1,10 @@
 {
   "pages": [
     "pages/student/main",
-    "pages/index/main",
+    "pages/studentDetail/main",
+    "pages/teacher/main",
     "pages/teacherDetail/main",
-    "pages/teacher/main"
+    "pages/index/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

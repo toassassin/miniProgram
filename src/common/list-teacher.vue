@@ -1,12 +1,12 @@
 <template>
-    <view class="weui-cells_after-title list-item list-scale">
+    <view class="weui-cells_after-title list-item">
         <navigator :url="'../teacherDetail/main?id='+data.id" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
                 <img src="../../static/img/img-man.png" alt="" style="margin-right: 15px;vertical-align: middle;width:90rpx; height: 90rpx;">
             </view>
             <view class="weui-cell__bd list-center">
                 <view>
-                    <text class="list-name">{{data.tcName}}/</text><text v-if="data.tcSex==1">男</text><text v-if="data.tcSex==2">女</text>
+                    <text class="list-name">{{data.tcName}}/</text><text class="list-sex" v-if="data.tcSex==1">男</text><text class="list-sex" v-if="data.tcSex==2">女</text>
                     <text class="list-code">T{{data.id}}</text>
                 </view>
                 <view>
@@ -41,6 +41,10 @@ export default {
     color: #404040;
     font-weight: bold;
 }
+.list-sex {
+    font-size: 32rpx;
+    color: #404040;
+}
 .list-code {
     margin-left: 10rpx;
     font-size: 12px;
@@ -55,8 +59,8 @@ export default {
 }
 .list-school .icon {
     display: inline-block;
-    width: 45rpx;
-    height: 44rpx;
+    width: 40rpx;
+    height: 40rpx;
     margin-right: 10rpx;
     background: url("../../static/img/img-xuexiao.png") no-repeat center;
     background-size: cover;
@@ -64,8 +68,8 @@ export default {
 }
 .list-subject .icon {
     display: inline-block;
-    width: 45rpx;
-    height: 44rpx;
+    width: 40rpx;
+    height: 40rpx;
     margin-right: 10rpx;
     background: url("../../static/img/img-subject.png") no-repeat center;
     background-size: cover;

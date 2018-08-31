@@ -1,6 +1,6 @@
 <template>
     <view class="list-item-r">
-        <view class="order-list" hover-class="weui-cell_active">
+        <navigator :url="'../studentDetail/main?id='+data.id" class="order-list" hover-class="weui-cell_active">
             <view>
                 <view>
                     <text class="grade-subject">{{data.grade}}{{data.subjectId}}</text>
@@ -26,13 +26,13 @@
                     <view class="weui-cell__ft  weui-cell__ft_in-access"></view>
                 </view>
             </view>
-        </view>
+        </navigator>
     </view>
 </template>
 <script>
-    export default{
-        props:["data"]
-    };
+export default {
+    props: ["data"]
+};
 </script>
 <style scoped>
 .grade-subject {
@@ -53,7 +53,7 @@
     font-size: 28rpx;
     color: #767676;
 }
-.order-disc text.time{
+.order-disc text.time {
     padding-left: 20rpx;
 }
 .order-disc text.area:after {
@@ -71,7 +71,7 @@
     background-color: #fff;
     margin-bottom: 10px;
 }
-.list-item-r .order-list{
+.list-item-r .order-list {
     padding: 0 24rpx;
 }
 .order-name {
