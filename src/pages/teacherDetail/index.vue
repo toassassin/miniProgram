@@ -84,8 +84,9 @@ export default {
                 prefix: "cd"
             });
             this.detail = detail.data.data;
+            console.log(this.detail);
+            this.subjectList = [];
             this.subjectList = this.detail.tcSubjects.split(",");
-            // console.log(this.detail);
         }
     }
 };

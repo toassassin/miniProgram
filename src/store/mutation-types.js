@@ -1,0 +1,5 @@
+export const SET_SUBJECT = 'SET_SUBJECT'
+
+export const SET_CITY_PREFIX = 'SET_CITY_PREFIX'
+
+export const SET_REFRESH_FLAG = 'SET_REFRESH_FLAG'

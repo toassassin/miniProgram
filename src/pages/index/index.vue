@@ -3,15 +3,15 @@
     <view>
         <view class="navbar-top">
             <view>
-                <navigator url="../teacher/main" open-type="switchTab" class="nav-left">请老师</navigator>
+                <navigator url="../yuyue/main" class="nav-left">请老师</navigator>
             </view>
             <view>
-                <navigator url="../counter/main" open-type="switchTab">当老师</navigator>
+                <navigator url="../student/main" open-type="switchTab">当老师</navigator>
             </view>
         </view>
     </view>
     <view>
-        <p class="location"><i class="icon"></i> 当前城市：<text>{{headData.cityName}}</text></p>
+        <p class="location"><i class="icon"></i> 当前城市：<text @tap="bindViewTap('../citylist/main')">{{headData.cityName}}</text></p>
     </view>
     <view>
         <view class="swiper-box">
@@ -58,11 +58,15 @@
         </view>
     </view>
     <view>
-        <view class="list-title" id="test">
+        <view class="list-title">
             <view :class="{active:currentData==0}"  data-current = "0" @tap='checkCurrent($event)'>热门老师</view>
             <view :class="{active:currentData==1}" data-current = "1" @tap='checkCurrent($event)'>最新订单</view>
         </view>
-        <swiper :current="currentData" class="swiper-list" :style="{height:list_item_height>0?list_item_height+'px':auto}" duration="300" @change="changerlist($event)">
+        <!-- <view class="list-title fixed" :class="{'show':menuFixed}">
+            <view :class="{active:currentData==0}"  data-current = "0" @tap='checkCurrent($event)'>热门老师{{scrollTop}}</view>
+            <view :class="{active:currentData==1}" data-current = "1" @tap='checkCurrent($event)'>最新订单</view>
+        </view> -->
+        <swiper :current="currentData" class="swiper-list" :style="{height:currentData==0?list_item_height+'px':list_item_height_r+'px'}" duration="300" @change="changerlist($event)">
             <swiper-item>
                 <scroll-view scroll-y :style="{height:list_item_height>0?list_item_height+'px':auto}">
                     <view v-for="(item,index) in hotTeacher" :key="index">
@@ -71,18 +75,26 @@
                 </scroll-view>
             </swiper-item>
             <swiper-item>
-                <scroll-view scroll-y style="background-color: #eee;" :style="{height:list_item_height_r>0?list_item_height_r+'px':auto}">
+                <scroll-view scroll-y :style="{height:list_item_height_r>0?list_item_height_r+'px':auto}">
                     <view v-for="(item,index) in newOrder" :key="index">
                         <listOrder :data="item"></listOrder>
                     </view>
                 </scroll-view>
             </swiper-item>
+            <!-- <swiper-item>
+                <scroll-view scroll-y style="background-color: #eee;" :style="{height:list_item_height_r>0?list_item_height_r+'px':auto}">
+                    <view v-for="(item,index) in newOrder" :key="index">
+                        <listOrder :data="item"></listOrder>
+                    </view>
+                </scroll-view>
+            </swiper-item> -->
         </swiper>
     </view>
   </view>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import navitem from "../../common/iconitem.vue";
 import listTeacher from "../../common/list-teacher.vue";
 import listOrder from "../../common/list-order.vue";
@@ -94,6 +106,10 @@ export default {
     },
     data() {
         return {
+            prefix: "gz",
+            scrollTop: 0,
+            top: 0,
+            menuFixed: false,
             list_item_height: 0,
             list_item_height_r: 0,
             headData: {},
@@ -118,37 +134,64 @@ export default {
     onLoad() {
         this.getData();
     },
+    onShow() {
+        if (this.$store.state.refresh == 1) {
+            this.prefix = this.$store.state.prefix;
+            this.getData();
+        }
+    },
     onReady() {},
+    // onPageScroll(e) {
+    //     this.scrollTop = e.scrollTop;
+    //     if (e.scrollTop > this.top) {
+    //         this.menuFixed = true;
+    //     } else {
+    //         this.menuFixed = false;
+    //     }
+    // },
     mounted() {},
     methods: {
+        ...mapMutations({
+            refresh: "SET_REFRESH_FLAG"
+        }),
         getHeightLeft() {
             var that = this;
-            console.log(wx.canIUse("createSelectorQuery"));
+            // console.log(wx.canIUse("createSelectorQuery"));
             wx
                 .createSelectorQuery()
                 .selectAll(".list-item")
                 .boundingClientRect(function(rects) {
                     // console.log("left=" + rects);
                     rects.forEach(function(rect) {
-                        // console.log("height1=" + rect.height);
                         that.list_item_height += rect.height;
                     });
-                    // console.log("left=" + that.list_item_height);
+                    console.log(that.list_item_height);
                 })
                 .exec();
         },
         getHeightRight() {
             var that = this;
+            // console.log(wx.canIUse("createSelectorQuery"));
             wx
                 .createSelectorQuery()
                 .selectAll(".list-item-r")
                 .boundingClientRect(function(rects) {
                     // console.log("right=" + rects);
                     rects.forEach(function(rect) {
-                        // console.log("height2=" + rect.height);
                         that.list_item_height_r += rect.height;
                     });
-                    // console.log("right=" + that.list_item_height_r);
+                    console.log(that.list_item_height_r);
+                })
+                .exec();
+        },
+        getTop() {
+            var that = this;
+            wx
+                .createSelectorQuery()
+                .select(".list-title")
+                .boundingClientRect(function(rect) {
+                    // console.log(rect);
+                    that.top = rect.top;
                 })
                 .exec();
         },
@@ -168,29 +211,31 @@ export default {
         },
         async getData() {
             var that = this;
-            // 头部信息
-            var headData = await this.$http.get("/index/getHeader", {
-                prefix: "cd"
-            });
-            this.headData = headData.data.data;
             // 热门老师
             var hotTeacher = await this.$http.get("/index/getTeacher", {
-                prefix: "cd"
+                prefix: this.prefix
             });
             this.hotTeacher = hotTeacher.data.data;
             // 最新订单
             var newOrder = await this.$http.post(
                 "/latestOrder/getLatestOrder",
-                { prefix: "cd" }
+                { prefix: this.prefix }
             );
             this.newOrder = newOrder.data.data;
+            // 头部信息
+            var headData = await this.$http.get("/index/getHeader", {
+                prefix: this.prefix
+            });
+            this.headData = headData.data.data;
             this.$nextTick(() => {
                 that.getHeightLeft();
                 that.getHeightRight();
+                that.getTop();
+                that.refresh(0);
             });
         },
         bindViewTap(url) {
-            wx.switchTab({ url:url });
+            wx.navigateTo({ url: url });
         },
         getUserInfo() {
             // 调用登录接口
@@ -315,6 +360,19 @@ export default {
     display: flex;
     justify-content: center;
     margin-bottom: 34rpx;
+    padding-bottom: 16rpx;
+}
+.list-title.fixed {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 5;
+}
+.list-title.show {
+    display: flex;
 }
 .list-title view {
     position: relative;

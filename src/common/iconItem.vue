@@ -1,29 +1,30 @@
 <template>
 	<view class="weui-grid" @tap="switchbar(text)" hover-class="weui-grid-active">
 		<image class="weui-grid__icon" :src="url" />
-        <!-- <img  class="weui-grid__icon" :src="url" alt=""> -->
         <text class="weui-grid__label">{{text}}</text>
     </view>
 </template>
 <script>
+import { mapMutations } from "vuex";
 export default {
     props: ["url", "text"],
     data() {
         return {};
     },
-    onLoad(){
-        // console.log(this.url)
-    },
-    methods:{
-        switchbar(arg){
-            if(arg=="更多"){
-                arg='';
+    onLoad() {},
+    methods: {
+        ...mapMutations({
+            setSubject: "SET_SUBJECT"
+        }),
+        switchbar(arg) {
+            if (arg == "更多") {
+                arg = "";
             }
-            // console.log(arg)
-            wx.setStorageSync("subject",arg);
+            console.log("arg=" + arg);
+            this.setSubject(arg);
             wx.switchTab({
-                url:"../teacher/main"
-            })
+                url: "../teacher/main"
+            });
         }
     }
 };

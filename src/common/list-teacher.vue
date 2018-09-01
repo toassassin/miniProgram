@@ -86,7 +86,7 @@ view.list-disc {
     -webkit-line-clamp: 2;
 }
 .list-right-arrow {
-    width: 50rpx;
+    width: 40rpx;
 }
 
 .list-right-arrow:after {

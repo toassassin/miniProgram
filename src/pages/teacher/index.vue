@@ -102,15 +102,12 @@ export default {
             current: 9
         };
     },
-    onLoad(options) {
-        // console.log("show");
-        console.log(wx.getStorageSync("subject"));
-        this.form.subject = wx.getStorageSync("subject");
+    onLoad(options) {},
+    onShow() {
+        console.log(this.$store.state.subject);
+        this.form.subject = this.$store.state.subject;
         this.formTamp = Object.assign({}, this.form);
         this.getData();
-
-    },
-    onShow() {
     },
     onReady() {
         console.log("ready");
@@ -119,8 +116,8 @@ export default {
         // console.log("pages=");
     },
     methods: {
-        getSearchVal(data){
-            this.search("searchText",data);
+        getSearchVal(data) {
+            this.search("searchText", data);
         },
         search(arg, value) {
             if (arg != "county" && value != "") {
