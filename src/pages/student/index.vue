@@ -53,7 +53,7 @@ export default {
             orderlist: {},
             origin: {},
             form: {
-                prefix: "cd",
+                prefix: "",
                 isGetDqList: 1,
                 page: 1,
                 status: "",
@@ -72,6 +72,7 @@ export default {
         //    this.getData();
     },
     onShow() {
+        this.form.prefix=this.$store.state.prefix;
         this.formTamp = Object.assign({}, this.form);
         this.getData();
     },

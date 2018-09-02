@@ -75,19 +75,12 @@
                 </scroll-view>
             </swiper-item>
             <swiper-item>
-                <scroll-view scroll-y :style="{height:list_item_height_r>0?list_item_height_r+'px':auto}">
+                <scroll-view scroll-y style="background-color:#eee;" :style="{height:list_item_height_r>0?list_item_height_r+'px':auto}">
                     <view v-for="(item,index) in newOrder" :key="index">
                         <listOrder :data="item"></listOrder>
                     </view>
                 </scroll-view>
             </swiper-item>
-            <!-- <swiper-item>
-                <scroll-view scroll-y style="background-color: #eee;" :style="{height:list_item_height_r>0?list_item_height_r+'px':auto}">
-                    <view v-for="(item,index) in newOrder" :key="index">
-                        <listOrder :data="item"></listOrder>
-                    </view>
-                </scroll-view>
-            </swiper-item> -->
         </swiper>
     </view>
   </view>
@@ -106,7 +99,7 @@ export default {
     },
     data() {
         return {
-            prefix: "gz",
+            prefix: "",
             scrollTop: 0,
             top: 0,
             menuFixed: false,
@@ -132,6 +125,7 @@ export default {
         };
     },
     onLoad() {
+        this.prefix=this.$store.state.prefix;
         this.getData();
     },
     onShow() {

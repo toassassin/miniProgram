@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/yuyue/main",
+    "pages/index/main",
     "pages/student/main",
+    "pages/yuyue/main",
     "pages/studentDetail/main",
     "pages/teacher/main",
     "pages/teacherDetail/main",
-    "pages/citylist/main",
-    "pages/index/main"
+    "pages/citylist/main"
 
   ],
   "window": {

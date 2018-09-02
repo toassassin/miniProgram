@@ -1,6 +1,6 @@
 const state = {
   subject: '',
-  prefix: '',
+  prefix: 'gz',
   refresh: 0
 }
 export default state

@@ -1,5 +1,5 @@
 <template>
-    <view class="list-item-r">
+    <view class="list-item-r" style="margin-bottom:20rpx;">
         <navigator :url="'../studentDetail/main?id='+data.id" class="order-list" hover-class="weui-cell_active">
             <view>
                 <view>

@@ -86,7 +86,7 @@ export default {
             school: {},
             // subject: {},
             form: {
-                prefix: "cd",
+                prefix: "",
                 schoolId: "",
                 schoolName: "",
                 subject: "",
@@ -102,8 +102,10 @@ export default {
             current: 9
         };
     },
-    onLoad(options) {},
+    onLoad(options) {
+    },
     onShow() {
+        this.form.prefix=this.$store.state.prefix;
         console.log(this.$store.state.subject);
         this.form.subject = this.$store.state.subject;
         this.formTamp = Object.assign({}, this.form);

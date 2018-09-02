@@ -107,7 +107,7 @@ export default {
         async getData() {
             var detail = await this.$http.post("/latestOrder/getOrderDetail", {
                 orderId: this.id,
-                prefix: "cd"
+                prefix: this.$store.state.prefix
             });
             this.detail = detail.data.data;
             console.log(this.detail);
