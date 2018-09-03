@@ -3,46 +3,49 @@
         <view class="yuyue-box">
             <view class="title"><i class="icon">简单填写，快速预约老师</i></view>
             <view class="form">
-                <view class=" weui-cells_after-title">
-                    <view class="weui-cell weui-cell_input">
-                        <view class="weui-cell__hd">
-                            <view class="weui-label">姓名</view>
+                <form report-submit="true" @submit="formsubmit">
+                    <view class=" weui-cells_after-title">
+                        <view class="weui-cell weui-cell_input">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label">姓名</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <input class="weui-input" id="name" name="name" placeholder="请输入姓名"/>
+                            </view>
                         </view>
-                        <view class="weui-cell__bd">
-                            <input class="weui-input" placeholder="请输入姓名"/>
-                        </view>
-                    </view>
-                    <view class="weui-cell weui-cell_input weui-cell_vcode">
-                        <view class="weui-cell__hd">
-                            <view class="weui-label">手机号</view>
-                        </view>
-                        <view class="weui-cell__bd">
-                            <input class="weui-input" placeholder="请输入手机号" />
-                        </view>
-                    </view>
-                </view>
-                <view class="weui-cell weui-cells_after-title">
-                    <view class="weui-cell weui-cell_select">
-                        <view class="weui-cell__hd weui-cell__hd_in-select-after">
-                            <view class="weui-label">年级/科目</view>
-                        </view>
-                        <view class="weui-cell__bd">
-                            <picker @change="gradeChange" :value="index1" :range="grade">
-                                <view class="weui-select weui-select_in-select-after">{{grade[index1]}}</view>
-                            </picker>
-                        </view>
-                        <view class="weui-cell__bd" v-if="index1==0">
-                            <picker @change="subjectChange" :value="index2" :range="subjects1">
-                                <view class="weui-select weui-select_in-select-after">{{subjects1[index2]}}</view>
-                            </picker>
-                        </view>
-                        <view class="weui-cell__bd" v-else>
-                            <picker @change="subjectChange" :value="index2" :range="subjects2">
-                                <view class="weui-select weui-select_in-select-after">{{subjects2[index2]}}</view>
-                            </picker>
+                        <view class="weui-cell weui-cell_input weui-cell_vcode">
+                            <view class="weui-cell__hd">
+                                <view class="weui-label">手机号</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <input class="weui-input" id="phone" name="phone" placeholder="请输入手机号" />
+                            </view>
                         </view>
                     </view>
-                </view>
+                    <view class="weui-cell weui-cells_after-title">
+                        <view class="weui-cell weui-cell_select">
+                            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                                <view class="weui-label">年级/科目</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                                <picker id="grade" name="grade" @change="gradeChange" :value="index1" :range="grade">
+                                    <view class="weui-select weui-select_in-select-after">{{grade[index1]}}</view>
+                                </picker>
+                            </view>
+                            <view class="weui-cell__bd" v-if="index1==0">
+                                <picker id="subject" name="subject" @change="subjectChange" :value="index2" :range="subjects1">
+                                    <view class="weui-select weui-select_in-select-after">{{subjects1[index2]}}</view>
+                                </picker>
+                            </view>
+                            <view class="weui-cell__bd" v-else>
+                                <picker id="subject" name="subject"  @change="subjectChange" :value="index2" :range="subjects2">
+                                    <view class="weui-select weui-select_in-select-after">{{subjects2[index2]}}</view>
+                                </picker>
+                            </view>
+                        </view>
+                    </view>
+                    <button class="btn" formType="submit">提交</button>
+                </form>
             </view>
         </view>
     </view>
@@ -67,6 +70,12 @@ export default {
         };
     },
     methods: {
+        formsubmit: function(e) {
+            console.log(
+                "form发生了submit事件，携带数据为：",
+                e.mp.detail.value
+            );
+        },
         gradeChange(e) {
             console.log(e.mp.detail.value);
             this.index1 = e.mp.detail.value;
