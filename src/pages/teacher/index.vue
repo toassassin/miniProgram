@@ -2,7 +2,7 @@
 	<view>
 	    <view class="filter-cover" v-if="current<4" @tap="current=9"></view>
 		<view class="fixed">
-			<search @input="getSearchVal"></search>
+			<search @input="getSearchVal" :text="'学校/科目/性别/类型'"></search>
 		    <view class="weui-flex">
 		        <view class="weui-flex__item filter-item" :class="{active:current==0}" data-current="0" @tap="showPanel($event)">
 		        	<view class="placeholder">学校</view>
@@ -64,7 +64,7 @@
 		</view>
 	    <view style="margin-top:90px;">
 			<scroll-view scroll-y style="height:auto;">
-				<view v-for="(item,index) in list.list" :key="index">
+				<view v-for="(item,index) in list" :key="index">
 					<listTeacher :data="item"></listTeacher>
 				</view>
 			</scroll-view>
@@ -81,7 +81,7 @@ export default {
     },
     data() {
         return {
-            list: {},
+            list: [],
             origin: {},
             school: {},
             // subject: {},
@@ -99,6 +99,8 @@ export default {
                 pageSize: "10"
             },
             formTamp: {},
+            scrollTamp: {},
+            totalPage: 1,
             current: 9
         };
     },
@@ -111,6 +113,20 @@ export default {
     },
     onReady() {
         // console.log("ready");
+    },
+    onReachBottom() {
+        var that = this;
+        this.scrollTamp.page++;
+        if (this.scrollTamp.page > this.totalPage) {
+            wx.showToast({
+                title: "已是最后一页",
+                icon: "none"
+            });
+            return false;
+        }
+        this.$http.post("/teacher/getList", this.scrollTamp).then(res => {
+            that.list = that.list.concat(res.data.data.list);
+        });
     },
     methods: {
         getSearchVal(data) {
@@ -130,23 +146,27 @@ export default {
             // console.log(JSON.stringify(this.formTamp));
             this.getData();
         },
-        async getData() {
+        getData() {
+            var that = this;
             // 市、区
-            var origin = await this.$http.get(
-                "/common/getPositionCounty",
-                this.formTamp
-            );
-            this.origin = origin.data.data;
+            this.$http
+                .get("/common/getPositionCounty", this.formTamp)
+                .then(res => {
+                    that.origin = res.data.data;
+                });
             // 学校
-            var school = await this.$http.post(
-                "/hotUniversity/getUniversityList",
-                this.formTamp
-            );
-            this.school = school.data.data;
+            this.$http
+                .post("/hotUniversity/getUniversityList", this.formTamp)
+                .then(res => {
+                    that.school = res.data.data;
+                });
             // 教员列表
-            var list = await this.$http.post("/teacher/getList", this.formTamp);
-            this.list = list.data.data;
+            this.$http.post("/teacher/getList", this.formTamp).then(res => {
+                that.list = res.data.data.list;
+                that.totalPage = res.data.data.totalPage;
+            });
 
+            this.scrollTamp = this.formTamp;
             this.formTamp = {};
         },
         showPanel(event) {
@@ -215,11 +235,13 @@ export default {
 }
 .filter-panel {
     display: flex;
+    font-size: 28rpx;
 }
 .filter-panel text {
     display: inline-block;
     padding: 2px 3px;
     margin: 4px;
+    font-size: 28rpx;
 }
 .filter-panel-left {
     width: 40%;

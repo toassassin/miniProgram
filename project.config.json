@@ -2,15 +2,16 @@
 	"description": "项目配置文件。",
 	"setting": {
 		"urlCheck": false,
-		"es6": false,
+		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
 	"miniprogramRoot": "./dist/",
+	"qcloudRoot": "./server",
 	"compileType": "miniprogram",
-	"appid": "wx58ac1e5cb5c83125",
-	"projectname": "xqy",
+	"appid": "wx9d294f630dcb323a",
+	"projectname": "mydeno",
 	"condition": {
 		"search": {
 			"current": -1,

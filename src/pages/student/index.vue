@@ -2,7 +2,7 @@
 	<view>
 	    <view class="filter-cover" v-if="current<3" @tap="current=9"></view>
 		<view class="fixed">
-			<search @input="getSearchVal"></search>
+			<search @input="getSearchVal" :text="'老师类型/区域'"></search>
 		    <view class="weui-flex">
 		        <view class="weui-flex__item filter-item" :class="{active:current==0}" data-current="0" @tap="showPanel($event)">
 		        	<view class="placeholder">订单状态</view>
@@ -32,7 +32,7 @@
 		</view>
 	    <view style="margin-top:90px;">
 			<scroll-view scroll-y style="background-color:#eee;">
-				<view v-for="(item,index) in orderlist.list" :key="index">
+				<view v-for="(item,index) in orderlist" :key="index">
 					<listOrder :data="item"></listOrder>
 				</view>
 			</scroll-view>
@@ -50,8 +50,8 @@ export default {
     data() {
         return {
             datalist: {},
-            orderlist: {},
-            origin: {},
+            orderlist: [],
+            currentPage: 1,
             form: {
                 prefix: "",
                 isGetDqList: 1,
@@ -62,6 +62,7 @@ export default {
                 searchText: ""
             },
             formTamp: {},
+            scrollTamp: {},
             current: 9
         };
     },
@@ -73,6 +74,25 @@ export default {
     },
     onReady() {
         // console.log("ready");
+    },
+    onReachBottom() {
+        // 订单列表
+        var that = this;
+        this.scrollTamp.page++;
+        if (this.scrollTamp.page > this.totalPage) {
+            wx.showToast({
+                title: "已是最后一页",
+                icon: "none"
+            });
+            return false;
+        }
+        this.$http
+            .post("/latestOrder/getPageOrder", this.scrollTamp)
+            .then(res => {
+                that.orderlist = that.orderlist.concat(
+                    res.data.data.mapPage.list
+                );
+            });
     },
     methods: {
         getSearchVal(data) {
@@ -91,13 +111,16 @@ export default {
             this.getData();
         },
         async getData() {
+            var that = this;
             // 订单列表
-            var datalist = await this.$http.post(
-                "/latestOrder/getPageOrder",
-                this.formTamp
-            );
-            this.datalist = datalist.data.data;
-            this.orderlist = datalist.data.data.mapPage;
+            this.$http
+                .post("/latestOrder/getPageOrder", this.formTamp)
+                .then(res => {
+                    that.datalist = res.data.data;
+                    that.orderlist = res.data.data.mapPage.list;
+                    that.totalPage = res.data.data.mapPage.totalPage;
+                });
+            this.scrollTamp = this.formTamp;
             this.formTamp = {};
         },
         showPanel(event) {
@@ -168,6 +191,7 @@ export default {
     display: inline-block;
     padding: 2px 3px;
     margin: 4px;
+    font-size: 28rpx;
 }
 .filter-panel-left {
     width: 40%;

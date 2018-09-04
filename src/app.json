@@ -10,10 +10,10 @@
 
   ],
   "window": {
+    "onReachBottomDistance": "50px",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#a5a5a5",

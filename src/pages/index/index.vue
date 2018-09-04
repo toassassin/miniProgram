@@ -34,7 +34,9 @@
         </view>
     </view>
     <view class="go">
-        <img src="/static/img/img-go.png" alt="">
+        <navigator url="../yuyue/main" hover-class="none" style="width:100%;">
+            <img src="/static/img/img-go.png" alt="">
+        </navigator>
     </view>
     <view>
         <view class=" weui-cells_after-title">
@@ -45,14 +47,18 @@
         </view>
         <view class="recommend-box">
             <view class="r-left">
-                <img src="/static/img/img-f-school.png" alt="">
+                <img src="/static/img/f-school.png" alt="">
             </view>
             <view class="r-right">
-                <view>
-                    <img src="/static/img/img-f-school.png" alt="">
+                <view style="margin-bottom:18rpx;">
+                    <navigator url="../student/main" open-type="switchTab" style="width:100%">
+                        <img src="/static/img/f-student.png" alt="">
+                    </navigator>
                 </view>
                 <view>
-                    <img src="/static/img/img-f-school.png" alt="">
+                    <navigator url="../yuyue/main" style="width:100%">
+                        <img src="/static/img/f-teacher.png" alt="">
+                    </navigator>
                 </view>
             </view>
         </view>
@@ -62,10 +68,6 @@
             <view :class="{active:currentData==0}"  data-current = "0" @tap='checkCurrent($event)'>热门老师</view>
             <view :class="{active:currentData==1}" data-current = "1" @tap='checkCurrent($event)'>最新订单</view>
         </view>
-        <!-- <view class="list-title fixed" :class="{'show':menuFixed}">
-            <view :class="{active:currentData==0}"  data-current = "0" @tap='checkCurrent($event)'>热门老师{{scrollTop}}</view>
-            <view :class="{active:currentData==1}" data-current = "1" @tap='checkCurrent($event)'>最新订单</view>
-        </view> -->
         <swiper :current="currentData" class="swiper-list" :style="{height:currentData==0?list_item_height+'px':list_item_height_r+'px'}" duration="300" @change="changerlist($event)">
             <swiper-item>
                 <scroll-view scroll-y :style="{height:list_item_height>0?list_item_height+'px':auto}">
@@ -99,6 +101,7 @@ export default {
     },
     data() {
         return {
+            flag: true,
             prefix: "",
             scrollTop: 0,
             top: 0,
@@ -118,9 +121,9 @@ export default {
                 { url: "/static/img/img-more.png", text: "更多" }
             ],
             imgs: [
-                "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1535385248&di=7716fc5c62cbe4cb35c49961fac20e79&src=http://pic9.photophoto.cn/20081128/0033033999061521_b.jpg",
-                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535395199954&di=91e1a397937692f7ebaa2719d2858c12&imgtype=0&src=http%3A%2F%2Fpic23.photophoto.cn%2F20120503%2F0034034456597026_b.jpg",
-                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535395199954&di=579371f867c3eba33130d24d8be5bff2&imgtype=0&src=http%3A%2F%2Fpic22.photophoto.cn%2F20120225%2F0034034432152602_b.jpg"
+                "/static/img/banner1.png",
+                "/static/img/banner2.png",
+                "/static/img/banner3.png"
             ]
         };
     },
@@ -130,20 +133,26 @@ export default {
     },
     onShow() {
         if (this.$store.state.refresh == 1) {
+            this.list_item_height = 0;
+            this.list_item_height_r = 0;
             this.prefix = this.$store.state.prefix;
             this.getData();
         }
     },
     onReady() {},
-    // onPageScroll(e) {
-    //     this.scrollTop = e.scrollTop;
-    //     if (e.scrollTop > this.top) {
-    //         this.menuFixed = true;
-    //     } else {
-    //         this.menuFixed = false;
-    //     }
-    // },
-    mounted() {},
+    onReachBottom() {
+        var that = this;
+        if (this.list_item_height == 0 && this.flag) {
+            this.flag = false;
+            this.$http
+                .get("/index/getTeacher", {
+                    prefix: this.prefix
+                })
+                .then(res => {
+                    that.hotTeacher = res.data.data;
+                });
+        }
+    },
     methods: {
         ...mapMutations({
             refresh: "SET_REFRESH_FLAG"
@@ -157,6 +166,7 @@ export default {
                     rects.forEach(function(rect) {
                         that.list_item_height += rect.height;
                     });
+                    console.log(that.list_item_height);
                 })
                 .exec();
         },
@@ -217,6 +227,7 @@ export default {
                 that.getHeightRight();
                 that.getTop();
                 that.refresh(0);
+                // wx.hideLoading();
             });
         },
         bindViewTap(url) {
@@ -289,10 +300,11 @@ export default {
 .go {
     display: flex;
     justify-content: center;
-    margin: 44rpx 0 70rpx;
+    margin: 34rpx 0 50rpx;
     padding: 0 24rpx;
 }
 .go image {
+    float: left;
     width: 100%;
     height: 100rpx;
     border-radius: 50rpx;
@@ -319,6 +331,7 @@ export default {
     align-content: space-between;
 }
 .recommend-box image {
+    float: left;
     width: 100%;
     border-radius: 8rpx;
 }

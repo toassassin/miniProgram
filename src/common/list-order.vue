@@ -75,7 +75,7 @@ export default {
     padding: 0 24rpx;
 }
 .order-name {
-    border-top: 1rpx solid #d9d9d9;
+    border-top: 1rpx solid #f3f3f3;
 }
 .order-name view {
     padding: 5rpx 0;
@@ -83,8 +83,8 @@ export default {
 .order-name .icon {
     display: inline-block;
     padding: 0;
-    width: 60rpx;
-    height: 70rpx;
+    width: 43rpx;
+    height: 50rpx;
     margin-right: 10rpx;
     background: url("../../static/img/img-name.png") no-repeat center;
     background-size: cover;

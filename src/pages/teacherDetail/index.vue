@@ -31,7 +31,7 @@
                     </li>
                     <li>
                         <span>年级</span>：
-                        <span>{{tcNj}}</span>
+                        <span>{{detail.tcNj}}</span>
                     </li>
                     <li>
                         <span>所在城市</span>：
@@ -129,7 +129,7 @@ export default {
     width: 40rpx;
     height: 40rpx;
     margin-right: 10rpx;
-    background: url("../../../static/img/img-subject.png") no-repeat center;
+    background: url("../../../static/img/img-zhuanye.png") no-repeat center;
     background-size: cover;
     vertical-align: text-bottom;
 }

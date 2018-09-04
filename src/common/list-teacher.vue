@@ -2,7 +2,7 @@
     <view class="weui-cells_after-title list-item">
         <navigator :url="'../teacherDetail/main?id='+data.id" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
-                <img src="../../static/img/img-man.png" alt="" style="margin-right: 15px;vertical-align: middle;width:90rpx; height: 90rpx;">
+                <img src="../../static/img/img-man.png" alt="" style="margin-right: 15px;vertical-align: middle;width:140rpx; height: 140rpx;">
             </view>
             <view class="weui-cell__bd list-center">
                 <view>
@@ -71,7 +71,7 @@ export default {
     width: 40rpx;
     height: 40rpx;
     margin-right: 10rpx;
-    background: url("../../static/img/img-subject.png") no-repeat center;
+    background: url("../../static/img/img-zhuanye.png") no-repeat center;
     background-size: cover;
     vertical-align: text-bottom;
 }
@@ -115,7 +115,7 @@ view.list-disc {
     bottom: 0;
     right: 0;
     height: 1px;
-    border-bottom: 1rpx solid #d9d9d9;
+    border-bottom: 1rpx solid #f3f3f3;
     color: #d9d9d9;
 }
 .list-item navigator {

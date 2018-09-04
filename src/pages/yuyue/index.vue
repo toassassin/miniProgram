@@ -24,7 +24,7 @@
                         </view>
                     </view>
                     <view class="weui-cell weui-cells_after-title">
-                        <view class="weui-cell weui-cell_select">
+                        <view class="weui-cell weui-cell_select" style="width:100%;">
                             <view class="weui-cell__hd weui-cell__hd_in-select-after">
                                 <view class="weui-label">年级/科目</view>
                             </view>
@@ -74,10 +74,16 @@ export default {
     methods: {
         formsubmit: function(e) {
             console.log(e.mp.detail.value);
+            if (!/^[1][3,4,5,7,8][0-9]{9}$/.test(e.mp.detail.value.phone)) {
+                wx.showModal({
+                    title: "提示",
+                    content: "请填写正确的手机号码"
+                });
+                return false;
+            }
             this.$http
                 .post("/marketing/consulation/submit", e.mp.detail.value)
                 .then(res => {
-                    console.log(res);
                     wx.showModal({
                         title: "提示",
                         content: res.data.msg
@@ -116,14 +122,14 @@ export default {
     color: #fff;
 }
 .form {
+    padding-bottom: 50rpx;
     margin-top: 10rpx;
-    /* height: 60%; */
     border-radius: 10rpx;
     background-color: #fff;
     font-size: 32rpx;
 }
 .weui-cell {
-    width: 100%;
+    /* width: 100%; */
     padding: 0px 30rpx;
 }
 .weui-cell__hd_in-select-after,
@@ -132,10 +138,16 @@ export default {
 }
 .weui-select {
     border-right: 0;
-    text-align: center;
 }
 .weui-select:before {
-    right: 60rpx;
+    right: 45rpx;
     border-width: 0 2px 2px 0;
+}
+button {
+    margin: 30rpx;
+    background-color: #ffc851;
+    border-radius: 0;
+    border: 0;
+    color: #fff;
 }
 </style>

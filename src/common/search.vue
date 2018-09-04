@@ -5,7 +5,7 @@
             <form class="weui-search-bar__form">
                 <view class="weui-search-bar__box">
                     <i class="weui-icon-search"></i>
-                    <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required v-model="inputVal"/>
+                    <input type="search" class="weui-search-bar__input" id="searchInput" :placeholder="text" required v-model="inputVal"/>
                     <view class="weui-icon-clear" v-if="inputVal.length > 0" @tap="clearInput">
                         <icon type="clear" size="14"></icon>
                     </view>
@@ -17,21 +17,28 @@
     </view>
 </template>
 <script>
-	export default{
-		data(){
-			return{
-				inputVal:''
-			}
-		},
-		methods:{
-			clearInput(){
-				this.inputVal='';
-			},
-            trigger(){
-                this.$emit("input",this.inputVal);
-            }
-		}
-	};
+export default {
+    props: ["text"],
+    data() {
+        return {
+            inputVal: ""
+        };
+    },
+    methods: {
+        clearInput() {
+            this.inputVal = "";
+        },
+        trigger() {
+            this.$emit("input", this.inputVal);
+        }
+    }
+};
 </script>
 <style scoped>
+.weui-search-bar {
+    border-bottom: 1px solid #eee;
+}
+.weui-search-bar__cancel-btn {
+    color: #83ccff;
+}
 </style>
