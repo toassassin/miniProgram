@@ -4,6 +4,7 @@
             <view class="title"><i class="icon">简单填写，快速预约老师</i></view>
             <view class="form">
                 <form report-submit="true" @submit="formsubmit">
+                    <input type="text" hidden="true" id="custom" name="custom" :value="source">
                     <view class=" weui-cells_after-title">
                         <view class="weui-cell weui-cell_input">
                             <view class="weui-cell__hd">
@@ -54,6 +55,7 @@
 export default {
     data() {
         return {
+            source: "小程序",
             index1: 0,
             index2: 0,
             grade: ["小学", "初中", "高中", "其他"],
@@ -71,17 +73,24 @@ export default {
     },
     methods: {
         formsubmit: function(e) {
-            console.log(
-                "form发生了submit事件，携带数据为：",
-                e.mp.detail.value
-            );
+            console.log(e.mp.detail.value);
+            this.$http
+                .post("/marketing/consulation/submit", e.mp.detail.value)
+                .then(res => {
+                    console.log(res);
+                    wx.showModal({
+                        title: "提示",
+                        content: res.data.msg
+                    });
+                });
         },
         gradeChange(e) {
-            console.log(e.mp.detail.value);
             this.index1 = e.mp.detail.value;
+            if (this.index1 == 0) {
+                this.index2 = 0;
+            }
         },
         subjectChange(e) {
-            console.log(e.mp.detail.value);
             this.index2 = e.mp.detail.value;
         }
     }

@@ -102,20 +102,15 @@ export default {
             current: 9
         };
     },
-    onLoad(options) {
-    },
+    onLoad(options) {},
     onShow() {
-        this.form.prefix=this.$store.state.prefix;
-        console.log(this.$store.state.subject);
+        this.form.prefix = this.$store.state.prefix;
         this.form.subject = this.$store.state.subject;
         this.formTamp = Object.assign({}, this.form);
         this.getData();
     },
     onReady() {
-        console.log("ready");
-    },
-    mounted() {
-        // console.log("pages=");
+        // console.log("ready");
     },
     methods: {
         getSearchVal(data) {

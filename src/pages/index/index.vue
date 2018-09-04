@@ -125,7 +125,7 @@ export default {
         };
     },
     onLoad() {
-        this.prefix=this.$store.state.prefix;
+        this.prefix = this.$store.state.prefix;
         this.getData();
     },
     onShow() {
@@ -150,31 +150,25 @@ export default {
         }),
         getHeightLeft() {
             var that = this;
-            // console.log(wx.canIUse("createSelectorQuery"));
             wx
                 .createSelectorQuery()
                 .selectAll(".list-item")
                 .boundingClientRect(function(rects) {
-                    // console.log("left=" + rects);
                     rects.forEach(function(rect) {
                         that.list_item_height += rect.height;
                     });
-                    console.log(that.list_item_height);
                 })
                 .exec();
         },
         getHeightRight() {
             var that = this;
-            // console.log(wx.canIUse("createSelectorQuery"));
             wx
                 .createSelectorQuery()
                 .selectAll(".list-item-r")
                 .boundingClientRect(function(rects) {
-                    // console.log("right=" + rects);
                     rects.forEach(function(rect) {
                         that.list_item_height_r += rect.height;
                     });
-                    console.log(that.list_item_height_r);
                 })
                 .exec();
         },
@@ -184,7 +178,6 @@ export default {
                 .createSelectorQuery()
                 .select(".list-title")
                 .boundingClientRect(function(rect) {
-                    // console.log(rect);
                     that.top = rect.top;
                 })
                 .exec();
@@ -200,9 +193,7 @@ export default {
         changerlist(event) {
             this.currentData = event.mp.detail.current;
         },
-        change(event) {
-            // console.log(event.mp.detail.current);
-        },
+        change(event) {},
         async getData() {
             var that = this;
             // 热门老师
@@ -230,19 +221,6 @@ export default {
         },
         bindViewTap(url) {
             wx.navigateTo({ url: url });
-        },
-        getUserInfo() {
-            // 调用登录接口
-            wx.login({
-                success: res => {
-                    console.log(res);
-                    wx.getUserInfo({
-                        success: res => {
-                            this.userInfo = res.userInfo;
-                        }
-                    });
-                }
-            });
         }
     }
 };

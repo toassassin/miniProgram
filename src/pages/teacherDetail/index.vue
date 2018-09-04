@@ -84,7 +84,6 @@ export default {
                 prefix: this.$store.state.prefix
             });
             this.detail = detail.data.data;
-            console.log(this.detail);
             this.subjectList = [];
             this.subjectList = this.detail.tcSubjects.split(",");
         }

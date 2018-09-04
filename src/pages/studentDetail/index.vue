@@ -110,7 +110,6 @@ export default {
                 prefix: this.$store.state.prefix
             });
             this.detail = detail.data.data;
-            console.log(this.detail);
         }
     }
 };
@@ -163,17 +162,17 @@ export default {
     text-align: center;
     font-size: 28rpx;
 }
-.order-detail{
+.order-detail {
     margin-bottom: 20rpx;
     padding: 20rpx 24rpx 20rpx 40rpx;
     background-color: #fff;
 }
-.order-detail .title{
+.order-detail .title {
     position: relative;
     font-size: 32rpx;
     color: #454545;
 }
-.order-detail .title:before{
+.order-detail .title:before {
     position: absolute;
     display: block;
     content: "";
@@ -183,14 +182,14 @@ export default {
     height: 30rpx;
     background-color: #ffc851;
 }
-.order-detail span:first-child{
+.order-detail span:first-child {
     display: inline-block;
     width: 120rpx;
     text-align: justify;
     text-align-last: justify;
     color: #767676;
 }
-.order-info{
+.order-info {
     padding-top: 20rpx;
     line-height: 40rpx;
     font-size: 28rpx;

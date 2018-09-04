@@ -65,30 +65,21 @@ export default {
             current: 9
         };
     },
-    onLoad(options) {
-        // console.log("options="+JSON.stringify(options))
-        //    console.log("load");
-        //    this.formTamp=Object.assign({},this.form);
-        //    this.getData();
-    },
+    onLoad(options) {},
     onShow() {
-        this.form.prefix=this.$store.state.prefix;
+        this.form.prefix = this.$store.state.prefix;
         this.formTamp = Object.assign({}, this.form);
         this.getData();
     },
     onReady() {
-        console.log("ready");
-    },
-    mounted() {
-        // console.log("pages=");
+        // console.log("ready");
     },
     methods: {
-        getSearchVal(data){
-            this.search("searchText",data);
+        getSearchVal(data) {
+            this.search("searchText", data);
         },
         search(arg, value) {
             this.current = 9;
-            console.log(arg);
             var that = this;
             this.formTamp = Object.assign({}, this.form);
             Object.keys(this.formTamp).forEach(function(item, index) {
@@ -107,12 +98,9 @@ export default {
             );
             this.datalist = datalist.data.data;
             this.orderlist = datalist.data.data.mapPage;
-            // console.log(this.orderlist);
-            //
             this.formTamp = {};
         },
         showPanel(event) {
-            // console.log(event.currentTarget);
             if (this.current == event.currentTarget.dataset.current) {
                 this.current = 9;
             } else {
