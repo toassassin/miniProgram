@@ -102,12 +102,8 @@ export default {
             this.current = 9;
             var that = this;
             this.formTamp = Object.assign({}, this.form);
-            Object.keys(this.formTamp).forEach(function(item, index) {
-                if (item == arg) {
-                    that.formTamp[item] = value;
-                }
-            });
-            // console.log(JSON.stringify(this.formTamp));
+            Object.defineProperty(this.formTamp,arg,{value:value});
+            console.log(JSON.stringify(this.formTamp));
             this.getData();
         },
         async getData() {
