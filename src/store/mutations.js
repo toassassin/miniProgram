@@ -18,5 +18,11 @@ const mutations = {
   [types.SET_CITY_PREFIX](state, value) {
     state.prefix = value;
   },
+  /**
+   * 学校ID
+   */
+  [types.SET_SCHOOLID](state,value){
+    state.schoolId=value;
+  }
 };
 export default mutations

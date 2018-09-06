@@ -46,9 +46,9 @@
             </navigator>
         </view>
         <view class="recommend-box">
-            <view class="r-left">
+            <navigator url="../school/main" class="r-left">
                 <img src="/static/img/f-school.png" alt="">
-            </view>
+            </navigator>
             <view class="r-right">
                 <view style="margin-bottom:18rpx;">
                     <navigator url="../student/main" open-type="switchTab" style="width:100%">
@@ -179,6 +179,7 @@ export default {
                     rects.forEach(function(rect) {
                         that.list_item_height_r += rect.height;
                     });
+                    that.list_item_height_r+=100;
                 })
                 .exec();
         },
@@ -283,7 +284,11 @@ export default {
     color: #83ccff;
 }
 .swiper-box {
-    padding: 0 24rpx;
+    margin: 0 24rpx;
+    box-shadow: 0 0 50rpx #D3D3D3;
+}
+.swiper{
+
 }
 .swiper .slide-image {
     width: 100%;

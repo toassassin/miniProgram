@@ -122,15 +122,22 @@ export default {
     color: #fff;
 }
 .form {
-    padding-bottom: 50rpx;
+    padding: 70rpx 54rpx 160rpx;
     margin-top: 10rpx;
     border-radius: 10rpx;
     background-color: #fff;
     font-size: 32rpx;
 }
 .weui-cell {
-    /* width: 100%; */
-    padding: 0px 30rpx;
+    padding: 0;
+}
+.weui-cell:before{
+  left: 0;
+  border-color: #fff;
+}
+.weui-cell_input{
+  margin-bottom: 90rpx;
+  border-bottom: 1px solid #f3f3f3;
 }
 .weui-cell__hd_in-select-after,
 .weui-cell_select {
@@ -144,10 +151,11 @@ export default {
     border-width: 0 2px 2px 0;
 }
 button {
-    margin: 30rpx;
+    margin: 30rpx 0;
     background-color: #ffc851;
     border-radius: 0;
     border: 0;
+    outline: none;
     color: #fff;
 }
 </style>

@@ -69,7 +69,6 @@ export default {
 .list-item-r {
     position: relative;
     background-color: #fff;
-    margin-bottom: 10px;
 }
 .list-item-r .order-list {
     padding: 0 24rpx;
@@ -83,7 +82,7 @@ export default {
 .order-name .icon {
     display: inline-block;
     padding: 0;
-    width: 43rpx;
+    width: 40rpx;
     height: 50rpx;
     margin-right: 10rpx;
     background: url("../../static/img/img-name.png") no-repeat center;

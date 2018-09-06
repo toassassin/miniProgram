@@ -106,10 +106,18 @@ export default {
     },
     onLoad(options) {},
     onShow() {
-        this.form.prefix = this.$store.state.prefix;
-        this.form.subject = this.$store.state.subject;
-        this.formTamp = Object.assign({}, this.form);
-        this.getData();
+      // this.form.prefix = this.$store.state.prefix;
+      // this.form.subject = this.$store.state.subject;
+      Object.defineProperties(this.form,{
+        prefix:{value:this.$store.state.prefix},
+        subject:{value:this.$store.state.subject},
+        schoolId:{value:this.$store.state.schoolId}
+      });
+      console.log(this.form);
+      this.$store.state.subject="";
+      this.$store.state.schoolId="";
+      this.formTamp = Object.assign({}, this.form);
+      this.getData();
     },
     onReady() {
         // console.log("ready");

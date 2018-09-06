@@ -106,7 +106,7 @@ export default {
             console.log(JSON.stringify(this.formTamp));
             this.getData();
         },
-        async getData() {
+        getData() {
             var that = this;
             // 订单列表
             this.$http

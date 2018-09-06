@@ -2,7 +2,8 @@
     <view class="weui-cells_after-title list-item">
         <navigator :url="'../teacherDetail/main?id='+data.id" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
             <view class="weui-cell__hd">
-                <img src="../../static/img/img-man.png" alt="" style="margin-right: 15px;vertical-align: middle;width:140rpx; height: 140rpx;">
+                <img v-if="data.tcSex==1" src="../../static/img/img-man.png" alt="" style="margin-right: 15px;vertical-align: middle;width:140rpx; height: 140rpx;">
+                <img v-else src="../../static/img/img-women.png" alt="" style="margin-right: 15px;vertical-align: middle;width:140rpx; height: 140rpx;">
             </view>
             <view class="weui-cell__bd list-center">
                 <view>

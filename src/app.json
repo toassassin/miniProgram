@@ -6,7 +6,8 @@
     "pages/studentDetail/main",
     "pages/teacher/main",
     "pages/teacherDetail/main",
-    "pages/citylist/main"
+    "pages/citylist/main",
+    "pages/school/main"
 
   ],
   "window": {

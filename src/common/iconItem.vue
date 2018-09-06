@@ -20,7 +20,6 @@ export default {
             if (arg == "更多") {
                 arg = "";
             }
-            console.log("arg=" + arg);
             this.setSubject(arg);
             wx.switchTab({
                 url: "../teacher/main"
