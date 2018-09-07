@@ -70,9 +70,6 @@ export default {
     position: relative;
     background-color: #fff;
 }
-.list-item-r .order-list {
-    padding: 0 24rpx;
-}
 .order-name {
     border-top: 1rpx solid #f3f3f3;
 }

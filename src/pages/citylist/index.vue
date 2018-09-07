@@ -2,6 +2,7 @@
     <view class="citylist">
         <view class="city-box">
             <view class="title">热门城市</view>
+            <view v-if="citys.length==0" style="text-align: center;">loading...</view>
             <view class="citys">
                 <text v-for="(item,index) in citys" :key="index" @tap="back(item.prefix)">{{item.cityName}}</text>
             </view>
@@ -13,7 +14,7 @@ import { mapMutations } from "vuex";
 export default {
     data() {
         return {
-            citys: {}
+            citys: []
         };
     },
     onLoad() {
@@ -33,6 +34,7 @@ export default {
             var that = this;
             var citys = await this.$http.get("/city/getList");
             this.citys = citys.data.data;
+            console.log(citys.data.data)
         }
     }
 };

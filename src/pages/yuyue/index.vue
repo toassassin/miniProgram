@@ -151,7 +151,7 @@ export default {
     border-width: 0 2px 2px 0;
 }
 button {
-    margin: 30rpx 0;
+    margin-top: 90rpx;
     background-color: #ffc851;
     border-radius: 0;
     border: 0;

@@ -57,11 +57,14 @@
                 <text>{{detail.tcCase}}</text>
             </view>
         </view>
-        <view class="list-item teacher-detail">
+        <view class="list-item teacher-detail" style="margin-bottom:90rpx;">
             <view class="title"><text>可授课科目</text></view>
             <view class="teacher-info teacher-subject">
                 <text v-for="(item,index) in subjectList" :key="index">{{item}}</text>
             </view>
+        </view>
+        <view class="yuyue">
+          <navigator url="../yuyue/main">预约试课</navigator>
         </view>
     </view>
 </template>
@@ -170,15 +173,28 @@ export default {
     color: #767676;
 }
 .teacher-subject text {
-    display: inline-block;
-    padding: 4rpx 10rpx;
-    margin-right: 16rpx;
-    margin-bottom: 10rpx;
-    text-align: center;
-    background-color: #f7f7f7;
-    font-size: 28rpx;
-    color: #767676;
-    white-space: nowrap;
-    border-radius: 8rpx;
+  display: inline-block;
+  padding: 4rpx 10rpx;
+  margin-right: 16rpx;
+  margin-bottom: 10rpx;
+  text-align: center;
+  background-color: #f7f7f7;
+  font-size: 28rpx;
+  color: #767676;
+  white-space: nowrap;
+  border-radius: 8rpx;
+}
+.yuyue{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+.yuyue navigator{
+  padding: 20rpx 0;
+  background-color: #ffc851;
+  text-align: center;
+  font-size: 32rpx;
+  color: #fff;
 }
 </style>

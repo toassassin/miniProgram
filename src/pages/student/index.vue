@@ -1,6 +1,6 @@
 <template>
-	<view>
-	    <view class="filter-cover" v-if="current<3" @tap="current=9"></view>
+	<view :class="{fixedScroll:isShow}">
+	    <view class="filter-cover" v-if="current<3" @tap="hide"></view>
 		<view class="fixed">
 			<search @input="getSearchVal" :text="'老师类型/区域'"></search>
 		    <view class="weui-flex">
@@ -25,18 +25,19 @@
                     <text @tap="search('lsType','大学生')">大学生</text>
 					<text @tap="search('lsType','其他')">其他</text>
 				</view>
-                <view class="filter-panel" v-if="current==2">
-                    <text v-for="(item,index) in datalist.dqList" :key="index" @tap="search('dq',item.id)">{{item.countyName}}</text>
-                </view>
+        <view class="filter-panel" v-if="current==2">
+            <text v-for="(item,index) in datalist.dqList" :key="index" @tap="search('dq',item.id)">{{item.countyName}}</text>
+        </view>
 		    </view>
 		</view>
-	    <view style="margin-top:90px;">
+    <view style="margin-top:90px;">
+      <view v-if="noMsg" style="text-align: center;">无相关数据</view>
 			<scroll-view scroll-y style="background-color:#eee;">
 				<view v-for="(item,index) in orderlist" :key="index">
 					<listOrder :data="item"></listOrder>
 				</view>
 			</scroll-view>
-	    </view>
+    </view>
 	</view>
 </template>
 <script>
@@ -49,8 +50,10 @@ export default {
     },
     data() {
         return {
+            isShow:false,
             datalist: {},
             orderlist: [],
+            noMsg:false,
             currentPage: 1,
             form: {
                 prefix: "",
@@ -99,37 +102,54 @@ export default {
             this.search("searchText", data);
         },
         search(arg, value) {
-            this.current = 9;
             var that = this;
+            this.current = 9;
+            this.isShow=false;
             this.formTamp = Object.assign({}, this.form);
             Object.defineProperty(this.formTamp,arg,{value:value});
-            console.log(JSON.stringify(this.formTamp));
+            // console.log(JSON.stringify(this.formTamp));
             this.getData();
         },
         getData() {
             var that = this;
+            this.noMsg=false;
             // 订单列表
             this.$http
                 .post("/latestOrder/getPageOrder", this.formTamp)
                 .then(res => {
                     that.datalist = res.data.data;
                     that.orderlist = res.data.data.mapPage.list;
+                    if(that.orderlist.length==0){
+                      that.noMsg=true;
+                    }
                     that.totalPage = res.data.data.mapPage.totalPage;
                 });
+
             this.scrollTamp = this.formTamp;
             this.formTamp = {};
         },
         showPanel(event) {
             if (this.current == event.currentTarget.dataset.current) {
+                this.isShow=false;
                 this.current = 9;
             } else {
+                this.isShow=true;
                 this.current = event.currentTarget.dataset.current;
             }
+        },
+        hide(){
+          this.current=9;
+          this.isShow=false;
         }
     }
 };
 </script>
 <style scoped>
+.fixedScroll{
+  position: fixed;
+  height: 100%;
+  overflow: hidden;
+}  
 .fixed {
     position: fixed;
     top: 0;

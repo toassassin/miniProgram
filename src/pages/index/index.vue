@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view>
+    <view class="fixed">
         <view class="navbar-top">
             <view>
                 <navigator url="../yuyue/main" class="nav-left">请老师</navigator>
@@ -101,7 +101,7 @@ export default {
     },
     data() {
         return {
-            flag: true,
+            counter: 0,
             prefix: "",
             scrollTop: 0,
             top: 0,
@@ -132,6 +132,7 @@ export default {
         this.getData();
     },
     onShow() {
+        this.counter=0;
         if (this.$store.state.refresh == 1) {
             this.list_item_height = 0;
             this.list_item_height_r = 0;
@@ -139,17 +140,20 @@ export default {
             this.getData();
         }
     },
-    onReady() {},
     onReachBottom() {
         var that = this;
-        if (this.list_item_height == 0 && this.flag) {
-            this.flag = false;
+        if (this.list_item_height == 0 && this.counter<3) {
+            this.counter++;
+            console.log("counter="+this.counter)
             this.$http
                 .get("/index/getTeacher", {
                     prefix: this.prefix
                 })
                 .then(res => {
                     that.hotTeacher = res.data.data;
+
+                    that.getHeightLeft();
+                    that.getHeightRight();
                 });
         }
     },
@@ -159,6 +163,7 @@ export default {
         }),
         getHeightLeft() {
             var that = this;
+            this.list_item_height=0;
             wx
                 .createSelectorQuery()
                 .selectAll(".list-item")
@@ -172,6 +177,7 @@ export default {
         },
         getHeightRight() {
             var that = this;
+            this.list_item_height_r=0;
             wx
                 .createSelectorQuery()
                 .selectAll(".list-item-r")
@@ -239,11 +245,18 @@ export default {
 </script>
 
 <style scoped>
+ .fixed{
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   background-color: #fff;
+   z-index: 3;
+ }
 .navbar-top {
     display: flex;
     justify-content: space-between;
     box-shadow: 0 8rpx 12rpx #f3f3f3;
-    margin-bottom: 25rpx;
 }
 .navbar-top view {
     flex: 1;
@@ -268,6 +281,7 @@ export default {
     background-color: #ffc851;
 }
 .location {
+    margin-top: 105rpx;
     margin-bottom: 25rpx;
     text-align: center;
     font-size: 28rpx;
@@ -285,7 +299,7 @@ export default {
 }
 .swiper-box {
     margin: 0 24rpx;
-    box-shadow: 0 0 50rpx #D3D3D3;
+    box-shadow: 0 0 50rpx #cecdcd;
 }
 .swiper{
 

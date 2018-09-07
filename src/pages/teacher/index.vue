@@ -1,6 +1,6 @@
 <template>
-	<view>
-	    <view class="filter-cover" v-if="current<4" @tap="current=9"></view>
+	<view :class="{fixedScroll:isShow}">
+	    <view class="filter-cover" v-if="current<4" @tap="hide"></view>
 		<view class="fixed">
 			<search @input="getSearchVal" :text="'学校/科目/性别/类型'"></search>
 		    <view class="weui-flex">
@@ -22,10 +22,10 @@
 					<view class="filter-box filter-panel-left">
 						<scroll-view scroll-y style="height:400rpx;" class="scroll-y">
 							<view class="weui-cells_after-title">
-								<view class="weui-cell weui-cell_access" hover-class="weui-cell_active" @tap="search('county','')">
-									<view class="weui-cell__hd">全部</view>
-									<view class="weui-cell__ft weui-cell__ft_in-access list-right-arrow"></view>
-								</view>
+                <view class="weui-cell" hover-class="weui-cell_active" @tap="search('county','')">
+                  <view class="weui-cell__bd">全部</view>
+                  <view class="weui-cell__ft  weui-cell__ft_in-access"></view>
+                </view>
 							</view>
 							<view class="weui-cells_after-title" v-for="(item,index) in origin" :key="index">
 								<view class="weui-cell" hover-class="weui-cell_active" @tap="search('county',item.countyName)">
@@ -62,13 +62,16 @@
 				</view>
 		    </view>
 		</view>
-	    <view style="margin-top:90px;">
-			<scroll-view scroll-y style="height:auto;">
-				<view v-for="(item,index) in list" :key="index">
-					<listTeacher :data="item"></listTeacher>
-				</view>
-			</scroll-view>
-	    </view>
+
+
+    <view style="margin-top:90px;">
+      <view v-if="list==null" style="text-align: center;">无相关数据</view>
+      <scroll-view scroll-y style="height:auto;">
+        <view v-for="(item,index) in list" :key="index">
+          <listTeacher :data="item"></listTeacher>
+        </view>
+      </scroll-view>
+    </view>
 	</view>
 </template>
 <script>
@@ -81,6 +84,7 @@ export default {
     },
     data() {
         return {
+            isShow:false,
             list: [],
             origin: {},
             school: {},
@@ -104,10 +108,7 @@ export default {
             current: 9
         };
     },
-    onLoad(options) {},
     onShow() {
-      // this.form.prefix = this.$store.state.prefix;
-      // this.form.subject = this.$store.state.subject;
       Object.defineProperties(this.form,{
         prefix:{value:this.$store.state.prefix},
         subject:{value:this.$store.state.subject},
@@ -141,13 +142,14 @@ export default {
             this.search("searchText", data);
         },
         search(arg, value) {
-            if (arg != "county" && value != "") {
-                this.current = 9;
-            }
             var that = this;
+            if (arg != "county" && value != "") {
+              this.current = 9;
+              this.isShow=false;
+            }
             this.formTamp = Object.assign({}, this.form);
             Object.defineProperty(this.formTamp,arg,{value:value});
-            // console.log(JSON.stringify(this.formTamp));
+            console.log(JSON.stringify(this.formTamp));
             this.getData();
         },
         getData() {
@@ -175,16 +177,27 @@ export default {
         },
         showPanel(event) {
             if (this.current == event.currentTarget.dataset.current) {
+                this.isShow=false;
                 this.current = 9;
             } else {
+                this.isShow=true;
                 this.current = event.currentTarget.dataset.current;
             }
+        },
+        hide(){
+          this.current=9;
+          this.isShow=false;
         }
     }
 };
 </script>
 <style scoped>
-.fixed {
+  .fixedScroll{
+    position: fixed;
+    height: 100%;
+    overflow: hidden;
+  }
+  .fixed {
     position: fixed;
     top: 0;
     left: 0;

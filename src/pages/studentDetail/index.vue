@@ -19,8 +19,8 @@
             </view>
         </view>
         <view class="process">
-            <view>1、申请订单</view>
-            <view>2、待审核挑选</view>
+            <view class="step step-1">1、申请订单</view>
+            <view class="step step-2">2、待审核挑选</view>
             <view>3、获取订单</view>
         </view>
         <view class="order-detail">
@@ -62,7 +62,7 @@
                 </ul>
             </view>
         </view>
-        <view class="order-detail">
+        <view class="order-detail" style="margin-bottom:90rpx;">
             <view class="title"><text>教员信息</text></view>
             <view class="order-info">
                 <ul>
@@ -88,6 +88,9 @@
                     </li>
                 </ul>
             </view>
+        </view>
+        <view class="yuyue">
+          <navigator url="../webview/main">申请成为教员</navigator>
         </view>
     </view>
 </template>
@@ -153,14 +156,53 @@ export default {
     align-items: center;
     margin: 20rpx 0;
     height: 88rpx;
-    /* background: url("../../../static/img/img-liucheng.png") no-repeat left top; */
-    background: url("../../../static/img/img-liucheng.png") no-repeat left top;
-    background-size: 100% 100%;
+    background-color:#fbfbfb;
+    /*background: url("../../../static/img/img-lc.png") no-repeat left top;*/
+    /*background-size: 100% 100%;*/
 }
 .process view {
     width: 33.333333%;
     text-align: center;
     font-size: 28rpx;
+}
+.process .step{
+  position: relative;
+  height: 100%;
+  line-height: 88rpx;
+}
+.process .step-1{
+  background-color: #ffc851;
+}
+.process .step-1:after{
+  position: absolute;
+  display: block;
+  content: "";
+  top: 0;
+  right: -40rpx;
+  width: 0;
+  height: 0;
+  border-top: 44rpx solid #fbfbfb;
+  border-right: 44rpx solid #fbfbfb;
+  border-bottom: 44rpx solid #fbfbfb;
+  border-left: 44rpx solid transparent;
+}
+.process .step-2:after{
+  position: absolute;
+  display: block;
+  content: "";
+  top: 10rpx;
+  right: 0;
+  width: 60rpx;
+  height: 60rpx;
+  border-top: 2rpx solid #ddd;
+  border-right: 2rpx solid #ddd;
+  border-bottom: 2rpx solid transparent;
+  border-left: 2rpx solid transparent;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 .order-detail {
     margin-bottom: 20rpx;
@@ -194,5 +236,18 @@ export default {
     line-height: 40rpx;
     font-size: 28rpx;
     color: #404040;
+}
+.yuyue{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+.yuyue navigator{
+  padding: 20rpx 0;
+  background-color: #ffc851;
+  text-align: center;
+  font-size: 32rpx;
+  color: #fff;
 }
 </style>
