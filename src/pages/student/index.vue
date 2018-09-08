@@ -4,13 +4,13 @@
 		<view class="fixed">
 			<search @input="getSearchVal" :text="'老师类型/区域'"></search>
 		    <view class="weui-flex">
-		        <view class="weui-flex__item filter-item" :class="{active:current==0}" data-current="0" @tap="showPanel($event)">
+		        <view class="weui-flex__item filter-item" :class="{active:current===0}" data-current="0" @tap="showPanel($event)">
 		        	<view class="placeholder">订单状态</view>
 		        </view>
-		        <view class="weui-flex__item filter-item" :class="{active:current==1}" data-current="1" @tap="showPanel($event)">
+		        <view class="weui-flex__item filter-item" :class="{active:current===1}" data-current="1" @tap="showPanel($event)">
 		        	<view class="placeholder">老师要求</view>
 		        </view>
-		        <view class="weui-flex__item filter-item" :class="{active:current==2}" data-current="2" @tap="showPanel($event)">
+		        <view class="weui-flex__item filter-item" :class="{active:current===2}" data-current="2" @tap="showPanel($event)">
 		        	<view class="placeholder">所在区域</view>
 		        </view>
 		    </view>
@@ -119,7 +119,7 @@ export default {
                 .then(res => {
                     that.datalist = res.data.data;
                     that.orderlist = res.data.data.mapPage.list;
-                    if(that.orderlist.length==0){
+                    if(that.orderlist.length===0){
                       that.noMsg=true;
                     }
                     that.totalPage = res.data.data.mapPage.totalPage;
@@ -129,7 +129,7 @@ export default {
             this.formTamp = {};
         },
         showPanel(event) {
-            if (this.current == event.currentTarget.dataset.current) {
+            if (this.current === event.currentTarget.dataset.current) {
                 this.isShow=false;
                 this.current = 9;
             } else {

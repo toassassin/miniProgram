@@ -3,12 +3,12 @@
         <view class="weui-cells_after-title list-item list-scale">
             <view class="weui-cell weui-cell_access" >
                 <view class="weui-cell__hd">
-                    <img v-if="detail.tcSex==1" src="/static/img/img-man.png" alt="" style="margin-right: 15px;vertical-align: middle;width:90rpx; height: 90rpx;">
+                    <img v-if="detail.tcSex===1" src="/static/img/img-man.png" alt="" style="margin-right: 15px;vertical-align: middle;width:90rpx; height: 90rpx;">
                     <img v-else src="/static/img/img-women.png" alt="" style="margin-right: 15px;vertical-align: middle;width:90rpx; height: 90rpx;">
                 </view>
                 <view class="weui-cell__bd list-center">
                     <view>
-                        <text class="list-name">{{detail.tcName}}/</text><text class="list-sex" v-if="detail.tcSex==1">男</text><text class="list-sex" v-if="detail.tcSex==2">女</text>
+                        <text class="list-name">{{detail.tcName}}/</text><text class="list-sex" v-if="detail.tcSex===1">男</text><text class="list-sex" v-if="detail.tcSex===2">女</text>
                         <text class="list-code">T{{detail.id}}</text>
                     </view>
                     <view>

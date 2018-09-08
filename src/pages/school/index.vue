@@ -1,6 +1,6 @@
 <template>
   <view class="school">
-    <view v-if="schoolList.length==0&&noMsg" style="text-align: center;">loading...</view>
+    <view v-if="schoolList.length===0&&noMsg" style="text-align: center;">loading...</view>
     <view>
       <view class="school-box">
         <view class="school-item" :class="'school-item'+'-'+index" v-for="(item,index) in schoolList" :key="index" @tap="switchbar(item.id)">
@@ -49,7 +49,7 @@
         }
         this.$http.post("/hotUniversity/getHotUniversityList",data).then((res)=>{
           console.log(res.data);
-          if(res.data.data.length==0){
+          if(res.data.data.length===0){
             that.noMsg=false;
           }else{
             that.schoolList=res.data.data;

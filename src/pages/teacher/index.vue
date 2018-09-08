@@ -4,16 +4,16 @@
 		<view class="fixed">
 			<search @input="getSearchVal" :text="'学校/科目/性别/类型'"></search>
 		    <view class="weui-flex">
-		        <view class="weui-flex__item filter-item" :class="{active:current==0}" data-current="0" @tap="showPanel($event)">
+		        <view class="weui-flex__item filter-item" :class="{active:current===0}" data-current="0" @tap="showPanel($event)">
 		        	<view class="placeholder">学校</view>
 		        </view>
-		        <view class="weui-flex__item filter-item" :class="{active:current==1}" data-current="1" @tap="showPanel($event)">
+		        <view class="weui-flex__item filter-item" :class="{active:current===1}" data-current="1" @tap="showPanel($event)">
 		        	<view class="placeholder">科目</view>
 		        </view>
-		        <view class="weui-flex__item filter-item" :class="{active:current==2}" data-current="2" @tap="showPanel($event)">
+		        <view class="weui-flex__item filter-item" :class="{active:current===2}" data-current="2" @tap="showPanel($event)">
 		        	<view class="placeholder">性别</view>
 		        </view>
-		        <view class="weui-flex__item filter-item" :class="{active:current==3}" data-current="3" @tap="showPanel($event)">
+		        <view class="weui-flex__item filter-item" :class="{active:current===3}" data-current="3" @tap="showPanel($event)">
 		        	<view class="placeholder">类型</view>
 		        </view>
 		    </view>
@@ -65,7 +65,7 @@
 
 
     <view style="margin-top:90px;">
-      <view v-if="list==null" style="text-align: center;">无相关数据</view>
+      <view v-if="list===null" style="text-align: center;">无相关数据</view>
       <scroll-view scroll-y style="height:auto;">
         <view v-for="(item,index) in list" :key="index">
           <listTeacher :data="item"></listTeacher>
@@ -176,7 +176,7 @@ export default {
             this.formTamp = {};
         },
         showPanel(event) {
-            if (this.current == event.currentTarget.dataset.current) {
+            if (this.current === event.currentTarget.dataset.current) {
                 this.isShow=false;
                 this.current = 9;
             } else {

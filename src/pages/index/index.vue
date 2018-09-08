@@ -18,7 +18,7 @@
             <swiper class="swiper" indicator-dots="true" autoplay="true" circular="true" interval="3000" duration="500" @change="change($event)">
                 <block v-for="(item,index) in imgs" :key="index">
                     <swiper-item>
-                        <image :src="item" class="slide-image" mode="scaleToFill" width="100%" height="100%" />
+                        <image :src="item" class="slide-image" mode="scaleToFill" width="100%" height="100%"></image>
                     </swiper-item>
                 </block>
             </swiper>
@@ -65,10 +65,10 @@
     </view>
     <view>
         <view class="list-title">
-            <view :class="{active:currentData==0}"  data-current = "0" @tap='checkCurrent($event)'>热门老师</view>
-            <view :class="{active:currentData==1}" data-current = "1" @tap='checkCurrent($event)'>最新订单</view>
+            <view :class="{active:currentData===0}" data-current = "0" @tap='checkCurrent($event)'>热门老师</view>
+            <view :class="{active:currentData===1}" data-current = "1" @tap='checkCurrent($event)'>最新订单</view>
         </view>
-        <swiper :current="currentData" class="swiper-list" :style="{height:currentData==0?list_item_height+'px':list_item_height_r+'px'}" duration="300" @change="changerlist($event)">
+        <swiper :current="currentData" class="swiper-list" :style="{height:currentData===0?list_item_height+'px':list_item_height_r+'px'}" duration="300" @change="changerlist($event)">
             <swiper-item>
                 <scroll-view scroll-y :style="{height:list_item_height>0?list_item_height+'px':auto}">
                     <view v-for="(item,index) in hotTeacher" :key="index">
@@ -133,7 +133,7 @@ export default {
     },
     onShow() {
         this.counter=0;
-        if (this.$store.state.refresh == 1) {
+        if (this.$store.state.refresh === 1) {
             this.list_item_height = 0;
             this.list_item_height_r = 0;
             this.prefix = this.$store.state.prefix;
@@ -142,7 +142,7 @@ export default {
     },
     onReachBottom() {
         var that = this;
-        if (this.list_item_height == 0 && this.counter<3) {
+        if (this.list_item_height === 0 && this.counter<3) {
             this.counter++;
             console.log("counter="+this.counter)
             this.$http
@@ -200,8 +200,8 @@ export default {
                 .exec();
         },
         checkCurrent(event) {
-            // event.mp == event
-            if (this.currentData == event.target.dataset.current) {
+            // event.mp === event
+            if (this.currentData === event.target.dataset.current) {
                 return false;
             } else {
                 this.currentData = event.target.dataset.current;

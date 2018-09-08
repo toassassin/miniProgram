@@ -33,7 +33,7 @@
                                     <view class="weui-select weui-select_in-select-after">{{grade[index1]}}</view>
                                 </picker>
                             </view>
-                            <view class="weui-cell__bd" v-if="index1==0">
+                            <view class="weui-cell__bd" v-if="index1===0">
                                 <picker id="subject" name="subject" @change="subjectChange" :value="index2" :range="subjects1">
                                     <view class="weui-select weui-select_in-select-after">{{subjects1[index2]}}</view>
                                 </picker>
@@ -92,7 +92,7 @@ export default {
         },
         gradeChange(e) {
             this.index1 = e.mp.detail.value;
-            if (this.index1 == 0) {
+            if (this.index1 === 0) {
                 this.index2 = 0;
             }
         },

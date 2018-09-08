@@ -52,8 +52,8 @@
                         <span>{{detail.userSituation}}</span>
                     </li>
                     <li>
-                        <span style="width:auto;">授课次数每周{{detail.ots}}次</span>：
-                        <span>每次{{detail.oxs}}小时</span>
+                        <span style="width:auto;">授课次数</span>：
+                        <span>每周{{detail.ots}}次,每次{{detail.oxs}}小时</span>
                     </li>
                     <li style="display:flex;justify-content:flex-start;">
                         <span style="width:auto;">可授课时间</span>：
@@ -156,7 +156,7 @@ export default {
     align-items: center;
     margin: 20rpx 0;
     height: 88rpx;
-    background-color:#fbfbfb;
+    background-color: #fbfbfb;
     /*background: url("../../../static/img/img-lc.png") no-repeat left top;*/
     /*background-size: 100% 100%;*/
 }
@@ -165,44 +165,44 @@ export default {
     text-align: center;
     font-size: 28rpx;
 }
-.process .step{
-  position: relative;
-  height: 100%;
-  line-height: 88rpx;
+.process .step {
+    position: relative;
+    height: 100%;
+    line-height: 88rpx;
 }
-.process .step-1{
-  background-color: #ffc851;
+.process .step-1 {
+    background-color: #ffc851;
 }
-.process .step-1:after{
-  position: absolute;
-  display: block;
-  content: "";
-  top: 0;
-  right: -40rpx;
-  width: 0;
-  height: 0;
-  border-top: 44rpx solid #fbfbfb;
-  border-right: 44rpx solid #fbfbfb;
-  border-bottom: 44rpx solid #fbfbfb;
-  border-left: 44rpx solid transparent;
+.process .step-1:after {
+    position: absolute;
+    display: block;
+    content: "";
+    top: 0;
+    right: -40rpx;
+    width: 0;
+    height: 0;
+    border-top: 44rpx solid #fbfbfb;
+    border-right: 44rpx solid #fbfbfb;
+    border-bottom: 44rpx solid #fbfbfb;
+    border-left: 44rpx solid transparent;
 }
-.process .step-2:after{
-  position: absolute;
-  display: block;
-  content: "";
-  top: 10rpx;
-  right: 0;
-  width: 60rpx;
-  height: 60rpx;
-  border-top: 2rpx solid #ddd;
-  border-right: 2rpx solid #ddd;
-  border-bottom: 2rpx solid transparent;
-  border-left: 2rpx solid transparent;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
+.process .step-2:after {
+    position: absolute;
+    display: block;
+    content: "";
+    top: 10rpx;
+    right: 0;
+    width: 60rpx;
+    height: 60rpx;
+    border-top: 2rpx solid #ddd;
+    border-right: 2rpx solid #ddd;
+    border-bottom: 2rpx solid transparent;
+    border-left: 2rpx solid transparent;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 .order-detail {
     margin-bottom: 20rpx;
@@ -237,17 +237,17 @@ export default {
     font-size: 28rpx;
     color: #404040;
 }
-.yuyue{
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+.yuyue {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
-.yuyue navigator{
-  padding: 20rpx 0;
-  background-color: #ffc851;
-  text-align: center;
-  font-size: 32rpx;
-  color: #fff;
+.yuyue navigator {
+    padding: 20rpx 0;
+    background-color: #ffc851;
+    text-align: center;
+    font-size: 32rpx;
+    color: #fff;
 }
 </style>

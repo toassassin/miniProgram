@@ -2,7 +2,7 @@
     <view class="citylist">
         <view class="city-box">
             <view class="title">热门城市</view>
-            <view v-if="citys.length==0" style="text-align: center;">loading...</view>
+            <view v-if="citys.length===0" style="text-align: center;">loading...</view>
             <view class="citys">
                 <text v-for="(item,index) in citys" :key="index" @tap="back(item.prefix)">{{item.cityName}}</text>
             </view>
