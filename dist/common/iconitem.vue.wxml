@@ -1,0 +1,1 @@
+<template name="8c0058fe"><view class="_view data-v-861a1b10 weui-grid" bindtap="handleProxy" hover-class="weui-grid-active" data-eventid="{{'0'}}" data-comkey="{{$k}}"><image class="_image data-v-861a1b10 weui-grid__icon" src="{{url}}"></image> <text class="_text data-v-861a1b10 weui-grid__label">{{text}}</text></view></template>

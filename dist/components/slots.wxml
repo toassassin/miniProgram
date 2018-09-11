@@ -1,0 +1,4 @@
+
+<import src="/common/iconitem.vue.wxml" /><import src="/common/list-teacher.vue.wxml" /><import src="/common/list-order.vue.wxml" />
+<import src="/common/search.vue.wxml" /><import src="/common/list-order.vue.wxml" />
+<import src="/common/search.vue.wxml" /><import src="/common/list-teacher.vue.wxml" />

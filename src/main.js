@@ -3,8 +3,13 @@ import App from './App'
 import store from './store/index'
 import Fly from "flyio/dist/npm/wx"
 var fly = new Fly
-fly.config.baseURL = 'http://47.106.115.52:19091' // 配置请求基地址
-// fly.config.baseURL = 'https://uns0w5xq.qcloud.la' // 配置请求基地址
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV == "development") {
+  fly.config.baseURL = 'http://47.106.115.52:19091' // 配置请求基地址
+}
+if (process.env.NODE_ENV == "production") {
+  fly.config.baseURL = 'https://api.web.delijiajiao.com' // 配置请求基地址
+}
 Vue.prototype.$http = fly
 
 Vue.prototype.$store = store

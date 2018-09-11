@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/student/main",
+    "pages/yuyue/main",
+    "pages/studentDetail/main",
+    "pages/teacher/main",
+    "pages/teacherDetail/main",
+    "pages/citylist/main",
+    "pages/school/main",
+    "pages/webview/main"
+
+  ],
+  "window": {
+    "onReachBottomDistance": "50px",
+    "backgroundTextStyle": "light",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#a5a5a5",
+    "backgroundColor": "#fff",
+    "position": "bottom",
+    "selectedColor": "#ffc851",
+    "list": [{
+        "iconPath": "/static/img/img-index1.png",
+        "selectedIconPath": "/static/img/img-index2.png",
+        "pagePath": "pages/index/main",
+        "text": "首页"
+      },
+      {
+        "iconPath": "/static/img/img-t1.png",
+        "selectedIconPath": "/static/img/img-t2.png",
+        "pagePath": "pages/teacher/main",
+        "text": "老师"
+      },
+      {
+        "iconPath": "/static/img/img-s1.png",
+        "selectedIconPath": "/static/img/img-s2.png",
+        "pagePath": "pages/student/main",
+        "text": "学生"
+      }
+    ]
+  },
+  "debug": true
+}

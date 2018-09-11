@@ -1,0 +1,2 @@
+@import "../../common/vendor.wxss";
+.city-box.data-v-1e1e995f{padding:24rpx}.title.data-v-1e1e995f{font-weight:700}.citys.data-v-1e1e995f{padding-top:20rpx}.citys text.data-v-1e1e995f{display:inline-block;padding:4rpx 5rpx;margin:0 15rpx 15rpx 0;font-size:30rpx;color:#404040}

@@ -1,0 +1,3 @@
+require("../../common/manifest.js");
+require("../../common/vendor.js");
+global.webpackJsonp([4],{"1Gf6":function(e,n){},MVee:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var c=t("5nAL"),r=t.n(c),i=t("ql42");new r.a(i.a).$mount()},XvNA:function(e,n,t){"use strict";var c={render:function(){var e=this.$createElement,n=this._self._c||e;return n("view",[n("web-view",{attrs:{src:"http://cn.mikecrm.com/sLsUUaV",mpcomid:"0"}},[this._v("申请成为教员")])],1)},staticRenderFns:[]};n.a=c},pC04:function(e,n){},ql42:function(e,n,t){"use strict";var c=t("1Gf6"),r=t.n(c),i=t("XvNA");var s=function(e){t("pC04")},a=t("ybqe")(r.a,i.a,s,null,null);n.a=a.exports}},["MVee"]);
